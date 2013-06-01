@@ -18,9 +18,9 @@ import static org.junit.Assert.assertFalse;
 public class TowersOfHanoiStateTest{
 
     /**
-     *Test no argument constructor TowersOfHanoiState.
-     *Should initialize game with 3 starting disks.
-     *@see TowersOfHanoiState#TowersOfHanoiState
+     Test no argument constructor TowersOfHanoiState.
+     Should initialize game with 3 starting disks.
+     @see TowersOfHanoiState#TowersOfHanoiState
      */
 
     @Test public void noArgumentConstructorTest(){
@@ -36,9 +36,9 @@ public class TowersOfHanoiStateTest{
     }
       
     /**
-     *Test constructor TowersOfHanoiState with argument for number of disks.
-     *Should initialize game with number of disks specified.
-     *@see TowersOfHanoiState#TowersOfHanoiState
+     Test constructor TowersOfHanoiState with argument for number of disks.
+     Should initialize game with number of disks specified.
+     @see TowersOfHanoiState#TowersOfHanoiState
      */
 
     @Test public void constructorWithArgument1(){
@@ -52,9 +52,9 @@ public class TowersOfHanoiStateTest{
     }
 
     /**
-     *Test constructor TowersOfHanoiState with argument for number of disks.
-     *Should initialize game with number of disks specified.
-     *@see TowersOfHanoiState#TowersOfHanoiState
+     Test constructor TowersOfHanoiState with argument for number of disks.
+     Should initialize game with number of disks specified.
+     @see TowersOfHanoiState#TowersOfHanoiState
      */
 
 
@@ -70,8 +70,8 @@ public class TowersOfHanoiStateTest{
     }
 
     /**
-     *Test getIsGameSolved getter method which returns the boolean value isGameSolved
-     *@see TowersOfHanoiState#getIsGameSolved
+     Test getIsGameSolved getter method which returns the boolean value isGameSolved
+     @see TowersOfHanoiState#getIsGameSolved
      */
 
     @Test public void getIsGameSolved_Test(){
@@ -82,8 +82,8 @@ public class TowersOfHanoiStateTest{
     }
 
     /**
-     *Test getNumOfMoves getter method which returns the integer value numOfMoves.
-     *@see TowersOfHanoiState#getNumOfMoves
+     Test getNumOfMoves getter method which returns the integer value numOfMoves.
+     @see TowersOfHanoiState#getNumOfMoves
      */
 
     @Test public void getNumOfMoves_Test(){
@@ -94,8 +94,8 @@ public class TowersOfHanoiStateTest{
 
 
     /**
-     *Test isMoveLegal method (returns false if move is illegal)
-     *@see TowersOfHanoiState#isMoveLegal
+     Test isMoveLegal method (returns false if move is illegal)
+     @see TowersOfHanoiState#isMoveLegal
      */
 
     @Test public void isMoveLegal_Test1(){
@@ -106,8 +106,8 @@ public class TowersOfHanoiStateTest{
     }
 
     /**
-     *Test isMoveLegal method (returns false if move is illegal)
-     *@see TowersOfHanoiState#isMoveLegal
+     Test isMoveLegal method (returns false if move is illegal)
+     @see TowersOfHanoiState#isMoveLegal
      */
 
     @Test public void isMoveLegal_Test2() throws TowersOfHanoiState.TowersOfHanoiIllegalMoveException{
@@ -128,8 +128,8 @@ public class TowersOfHanoiStateTest{
 
 
     /**
-     *Test makeMove method, which moves disk from one tower to another.
-     *@see TowersOfHanoiState#makeMove
+     Test makeMove method, which moves disk from one tower to another.
+     @see TowersOfHanoiState#makeMove
      */
 
     @Test public void makeMove_Test1() throws TowersOfHanoiState.TowersOfHanoiIllegalMoveException{
@@ -151,8 +151,8 @@ public class TowersOfHanoiStateTest{
     }
 
     /**
-     *Test makeMove method, which moves disk from one tower to another.
-     *@see TowersOfHanoiState#makeMove
+     Test makeMove method, which moves disk from one tower to another.
+     @see TowersOfHanoiState#makeMove
      */
 
     @Test public void makeMove_Test2() throws TowersOfHanoiState.TowersOfHanoiIllegalMoveException{
@@ -176,8 +176,8 @@ public class TowersOfHanoiStateTest{
     }
 
     /**
-     *Test makeMove method, which moves disk from one tower to another.
-     *@see TowersOfHanoiState#makeMove
+     Test makeMove method, which moves disk from one tower to another.
+     @see TowersOfHanoiState#makeMove
      */
 
     @Test public void makeMove_TestException(){
@@ -192,8 +192,8 @@ public class TowersOfHanoiStateTest{
     }
 
     /**
-     *Test disksOnTower method, which returns an integer array of the disks on given tower.
-     *@see TowersOfHanoiState#disksOnTower
+     Test disksOnTower method, which returns an integer array of the disks on given tower.
+     @see TowersOfHanoiState#disksOnTower
      */
 
     @Test public void disksOnTower_Test(){
@@ -209,8 +209,8 @@ public class TowersOfHanoiStateTest{
     }
 
     /**
-     *Test toString method which returns an ASCII art representation of game state.
-     *@see TowersOfHanoiState#toString
+     Test toString method which returns an ASCII art representation of game state.
+     @see TowersOfHanoiState#toString
      */
 
     @Test public void toString_Test1(){
@@ -229,8 +229,8 @@ public class TowersOfHanoiStateTest{
     }
 
     /**
-     *Test toString method which returns an ASCII art representation of game state.
-     *@see TowersOfHanoiState#toString
+     Test toString method which returns an ASCII art representation of game state.
+     @see TowersOfHanoiState#toString
      */
 
     @Test public void toString_Test2() throws TowersOfHanoiState.TowersOfHanoiIllegalMoveException{
@@ -260,8 +260,8 @@ public class TowersOfHanoiStateTest{
     }    
 
     /**
-     *Test solved method which returns boolean value indicating if game is solved.
-     *@see TowersOfHanoiState#solved
+     Test solved method which returns boolean value indicating if game is solved.
+     @see TowersOfHanoiState#solved
      */
 
     @Test public void solved_Test1(){
@@ -274,8 +274,8 @@ public class TowersOfHanoiStateTest{
 
 
     /**
-     *Test solved method which returns boolean value indicating if game is solved.
-     *@see TowersOfHanoiState#solved
+     Test solved method which returns boolean value indicating if game is solved.
+     @see TowersOfHanoiState#solved
      */
 
     @Test public void solved_Test2() throws TowersOfHanoiState.TowersOfHanoiIllegalMoveException{

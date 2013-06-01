@@ -4,12 +4,14 @@
        name: Roeland Singer-Heinze -->
 
    <property environment="env"/> <!-- load the environment variables --> 
-   <property name="webRoot" value="${env.HOME}/public_html/cs56/13S" />
-   <property name="webBaseURL" value="http://www.cs.ucsb.edu/~${env.USER}/cs56" />
 
-  <property name="projectName" value="cs56-games-towers-of-hanoi" /> 
-  <property name="javadocDest" value="${webRoot}/~${env.USER}/${projectName}/javadoc" /> 
-  <property name="javadocURL" value="${webBaseURL}/${projectName}/javadoc" /> 
+   <property name="webRoot" value="${env.HOME}/public_html/cs56" />
+   <property name="webBaseURL" value="http://www.cs.ucsb.edu/~${env.USER}/cs56" />
+   <property name="projectName" value="cs56-games-towers-of-hanoi" /> 
+   <property name="javadocDest" value="${webRoot}/${projectName}/javadoc" /> 
+   <property name="javadocURL" value="${webBaseURL}/${projectName}/javadoc" /> 
+   <property name="javadocLink" value="http://java.sun.com/javase/7/docs/api/" />
+
 
 <path id="project.class.path">
          <pathelement location="build"/>
