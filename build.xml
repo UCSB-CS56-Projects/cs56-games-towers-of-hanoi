@@ -1,5 +1,4 @@
 <project default="compile">
-
   <!-- build.xml for TowersOfHanoiState, S13, CS56
        name: Roeland Singer-Heinze -->
 
@@ -71,7 +70,6 @@
                                                                                                   
    </target>    
 
-
   <target name="test" depends="compile" description="tests the project">
 
     <junit haltonerror="no" haltonfailure="no">
@@ -89,4 +87,9 @@
     </junit>
   </target>
 
+  <target name="EX_TIMERGUI" depends="compile" description="run my main in HanoiTimer">
+    <java fork="true" classpathref="project.class.path"
+		classname="edu.ucsb.cs56.projects.games.towers_of_hanoi.utility.HanoiTimerGUI"/>
+  </target>
+  <!-- Added by Will Mateer, runs an example of implementation and integration of the HanoiTimer into a program. Is an example for further use.-->
 </project>
