@@ -1,47 +1,65 @@
 package edu.ucsb.cs56.projects.games.towers_of_hanoi.utility;
-
 import java.awt.Toolkit;
 import java.awt.event.WindowEvent;
 
-
-
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 
 import edu.ucsb.cs56.projects.games.towers_of_hanoi.model.TowersOfHanoiState;
+
 /**
  * Main class that launches a GUI version of Towers of Hanoi
  * @author Aaron
  *
  */
+
 public class GUIMain {
 	
-public static void main (String [] args){
-				
-				DiskPrompt prompt = new DiskPrompt();//pop-up that asks for the number of disks
-				
-				//String input = prompt.getString();
-				int disks = 0;
-				while(disks < 3){//loop checks the input from prompt every second to check if it is valid (valid is if it is >= 3)
-					try {
-						Thread.sleep(1000);//1 second delay to keep CPU usage down
-					} catch (InterruptedException e) {
-						e.printStackTrace();
-					}
-					if(prompt.getString()==null)continue;
-					try {
-	            		disks = Integer.parseInt(prompt.getString());
-	            	    } catch (NumberFormatException e) {
-	            		disks = 0;
-	            		continue;
-	            	    }					
-				}
-				prompt.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);//sets close operation so it doesn't kill the program when we close the frame
-				WindowEvent wev = new WindowEvent(prompt, WindowEvent.WINDOW_CLOSING);//creates close event
-                Toolkit.getDefaultToolkit().getSystemEventQueue().postEvent(wev);//closes prompt
-				GameGUI gui = new GameGUI();
-				gui.setState(new TowersOfHanoiState(disks));
-	}
+	private static GameGUI gui;
+		public static void main (String [] args){
+		startGame();
+	}	
 
-	
-	
+	public static void startGame() {
+
+		// This allows us to restart the game without quitting the program
+		if (gui != null){ // Is a replay, close the old game, clear the disks prompt, show it
+			gui.close();
+		}
+
+		// Contents of dialogue
+		String[] options = {"Play"};
+		JPanel panel = new JPanel();
+		JLabel lbl = new JLabel("Number of Disks (3 to 25): ");
+		JTextField txt = new JTextField(10);
+		panel.add(lbl);
+		panel.add(txt);
+		
+		int numberOfDisks = 0;
+
+		// Keep looping through the dialogue until a valid number is entered
+		while (numberOfDisks > 25 || numberOfDisks < 3) {
+
+			// Show the dialogue
+			int userResponse = JOptionPane.showOptionDialog(null, panel, "Towers of Hanoi", JOptionPane.NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options , options[0]);
+			
+			if (userResponse == JOptionPane.CLOSED_OPTION) {
+            	// User clicked the 'x' button
+            	System.exit(0);
+        	}
+
+			// Try to parse the number they entered
+			try {
+				numberOfDisks = Integer.parseInt(txt.getText());
+			} catch (NumberFormatException nf) {
+				continue; // NaN -> show dialogue again
+			}
+		}
+
+		gui = new GameGUI();
+		gui.setState(new TowersOfHanoiState(numberOfDisks));
+	}
 }

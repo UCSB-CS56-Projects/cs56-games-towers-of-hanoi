@@ -3,48 +3,48 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 /** TowersOfHanoiState models the state of a game based on Towers of Hanoi.
-
-
+    
+    
  */
 
 
 public class TowersOfHanoiState{
-
-
+    
+    
     private boolean isGameSolved = false;
     private int numOfMoves = 0;
     private int numOfDisks;
     private ArrayList<ArrayList<Integer>> towers 
 	= new ArrayList<ArrayList<Integer>>(3); //the 3 towers and their disks will be stored here
-
-
+    
+    
     /**
-     Inner class, defining a specific exception for TowersOfHanoiState where move is illegal
-     */
+       Inner class, defining a specific exception for TowersOfHanoiState where move is illegal
+    */
 
     public static class TowersOfHanoiIllegalMoveException extends Exception{
-
+	
 	public TowersOfHanoiIllegalMoveException(){}
-    
+	
 	public TowersOfHanoiIllegalMoveException(String message){
-
+	    
 	    super(message);
 	}
-
+	
 	public TowersOfHanoiIllegalMoveException(Throwable cause){
-
+	    
 	    super(cause);
 	}
 
     }
-
-
+    
+    
     /**
-     No argument constructor which initializes a game starting with 3 disks.
+       No argument constructor which initializes a game starting with 3 disks.
      */
-
+    
     public TowersOfHanoiState(){
-
+	
 	towers = new ArrayList<ArrayList<Integer>>(3);
         towers.add(0, new ArrayList<Integer>(Arrays.asList(0, 1, 2)));
         towers.add(1, new ArrayList<Integer>(3));
@@ -57,9 +57,9 @@ public class TowersOfHanoiState{
      *Should initialize game with number of disks specified.
      *@param numOfDisks is an integer number specifying number of disks for game
      */
-
+    
     public TowersOfHanoiState(int numOfDisks){
-
+	
 	if (numOfDisks <= 3 ){ // Want a minimum of 3 disks
 
 	    towers = new ArrayList<ArrayList<Integer>>(3);
@@ -68,9 +68,9 @@ public class TowersOfHanoiState{
 	    towers.add(2, new ArrayList<Integer>(3));
 	    this.numOfDisks = 3;
 	}
-
+	
 	else { // else user input is number of disks
-
+	    
 	    towers = new ArrayList<ArrayList<Integer>>(3);
             towers.add(0, new ArrayList<Integer>(numOfDisks));
             towers.add(1, new ArrayList<Integer>(numOfDisks));
@@ -80,14 +80,14 @@ public class TowersOfHanoiState{
 	    }
 	    this.numOfDisks = numOfDisks;
 	}
-
+	
     }
 
     /**
      Getter method which returns the boolean value isGameSolved
      @return boolean value isGameSolved in TowersOfHanoiState
      */
-
+    
     public boolean getIsGameSolved(){
 
 
@@ -244,13 +244,13 @@ public class TowersOfHanoiState{
      This is a method to determine whether the game has been solved yet.
      @return a boolean value true if game is solved, false otherwise.
      */
-
+    
     public boolean solved(){
-
+	
 	int [] arr = new int[numOfDisks];
 	for (int x = 0; x < numOfDisks; x++)
 	    arr[x] = x;
-
+	
 	if (Arrays.equals(arr, disksOnTower(towers.get(1))) || Arrays.equals(arr, disksOnTower(towers.get(2)))){
 	    isGameSolved = true;
 	    return true;
@@ -266,8 +266,6 @@ public class TowersOfHanoiState{
     	int optimalSolution = (int) Math.pow(2,numOfDisks) - 1; // 2^n - 1 is the optimal solution for the game
     	System.out.println("Congratulations! You solved the game in " + this.getNumOfMoves()
                                + " steps. Optimal solution would have been " + optimalSolution
-                               + " steps." ); 
-    }
-
-
+			   + " steps." ); 
+    }   
 }

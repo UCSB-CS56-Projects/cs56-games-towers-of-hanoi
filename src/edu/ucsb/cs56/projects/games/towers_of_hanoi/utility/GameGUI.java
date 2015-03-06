@@ -9,22 +9,23 @@ import java.awt.event.*;
 import java.util.ArrayList;
 
 /**
- Example class of how to use HanoiTimer.  Uses buttons and a 
- JLabel.  ActionListeners call the HanoiTimer's start/restart/stop methods.
+ * Example class of how to use HanoiTimer.  Uses buttons and a 
+ * JLabel.  ActionListeners call the HanoiTimer's start/restart/stop methods.
 */
 public class GameGUI {
-	
-	private HanoiTimer gameTimer;
-	private JPanel timePanel;
-	private JLabel timeDisplay;
-	private JFrame frame;
-	private JPanel mainTimePanel;
-	private GamePanel gamePanel;
-	
+    
+    private HanoiTimer gameTimer;
+    private JPanel timePanel;
+    private JLabel timeDisplay;
+    private JFrame frame;
+    private JPanel mainTimePanel;
+    private GamePanel gamePanel;
+    
     
     public GameGUI() {
 	frame = new JFrame();
-    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
 	System.out.flush();
 	timeDisplay = new JLabel("0",JLabel.CENTER);
         timeDisplay.setForeground(Color.black);
@@ -36,7 +37,7 @@ public class GameGUI {
 	mainTimePanel = new JPanel(new BorderLayout());
 		
 	timePanel = new JPanel(new BorderLayout());
-    timePanel.add(timeDisplay, BorderLayout.CENTER);
+	timePanel.add(timeDisplay, BorderLayout.CENTER);
 	gameTimer = new HanoiTimer(timeDisplay);
 	gameTimer.SetTimeElapsedText();
 	mainTimePanel.add(timePanel, BorderLayout.NORTH);
@@ -46,9 +47,13 @@ public class GameGUI {
 	gamePanel.setTimer(gameTimer);
 
 	frame.add(gamePanel,BorderLayout.CENTER);	
-    frame.add(mainTimePanel,BorderLayout.NORTH);
+	frame.add(mainTimePanel,BorderLayout.NORTH);
 	frame.pack();
-    frame.setVisible(true);
+	
+	// centers the window
+	frame.setLocationRelativeTo(null);
+	
+	frame.setVisible(true);
 	gameTimer.start();
     }
 	
@@ -57,6 +62,7 @@ public class GameGUI {
     	gamePanel.setState(s);		
     }
 
-    
-
+    public void close() {
+	frame.dispose();
+    }
 }

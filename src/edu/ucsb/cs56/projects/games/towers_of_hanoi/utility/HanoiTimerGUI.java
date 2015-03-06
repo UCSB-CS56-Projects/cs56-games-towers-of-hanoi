@@ -9,8 +9,8 @@ import java.awt.event.*;
 import java.util.ArrayList;
 
 /**
- Example class of how to use HanoiTimer.  Uses buttons and a 
- JLabel.  ActionListeners call the HanoiTimer's start/restart/stop methods.
+ * Example class of how to use HanoiTimer.  Uses buttons and a 
+ * JLabel.  ActionListeners call the HanoiTimer's start/restart/stop methods.
 */
 public class HanoiTimerGUI {
 	
