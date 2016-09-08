@@ -59,14 +59,14 @@ public class CmdLineHanoi{
                 return; //Quit program if they typed q
 
 	    if (input.length < 2) {
-		System.out.println("Incorrect format. Please input two integers seperated with a space (i.e. \"0 2\").");
+		System.out.println("Incorrect format. Please input two integers separated with a space (i.e. \"0 2\").");
 		continue loops;
 	    }
 	    for ( int x = 0; x < 2; x++ ){
 		input[x] = input[x].replaceAll("[-\\D+]",""); //Get rid of anything in string that's not a digit
 		if ( input[x].equals("")){ //If there were no digits, then it's incorrect format.
 
-		    System.out.println("Incorrect format. Please input two integers seperated with a space (i.e. \"0 2\").");
+		    System.out.println("Incorrect format. Please input two integers separated with a space (i.e. \"0 2\").");
 		    continue loops; // go to loops: above and we can input integers again
 		}
 
