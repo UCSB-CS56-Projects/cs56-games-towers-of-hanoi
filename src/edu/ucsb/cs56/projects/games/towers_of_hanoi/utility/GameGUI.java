@@ -68,7 +68,8 @@ public class GameGUI {
 	instructions.setFont(new Font("Verdana",1,14));
 	frame.add(gamePanel,BorderLayout.CENTER);
 	frame.add(mainTimePanel,BorderLayout.NORTH);
-	frame.add(instructions,BorderLayout.SOUTH);
+	if (GUIMain.gamesetting.getInstruction()){
+	    frame.add(instructions,BorderLayout.SOUTH);}
 	frame.pack();
 	System.out.flush();
 	
