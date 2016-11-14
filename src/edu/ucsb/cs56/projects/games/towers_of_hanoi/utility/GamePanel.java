@@ -28,6 +28,7 @@ public class GamePanel extends JPanel {
     private int sideOffset;//The horizontal space between the side towers and the side of the Panel
     private final Color TOWER_COLOR = new Color(0xe4cbab);//color of towers
     private final Color DISK_COLOR = new Color(0x8c4f00);//color of disks
+    private final Color SELECTED_DISK_COLOR = new Color(0x21da35);
     private final Color TOWER_ON_COLOR = new Color(0xccffff);//color of tower you clicked on
     private int maxDisk;//value of the biggest disk possible on the towers
     private int towerHeight;//vertical height of the towers
@@ -105,7 +106,9 @@ public class GamePanel extends JPanel {
     				int diskWidth = TOWER_WIDTH - (TOWER_WIDTH/(maxDisk+1))*(maxDisk- towers.get(tower-1).get(j-1)); 
 
     				int x = towerX+((TOWER_WIDTH-diskWidth)/2);
-    				g.setColor(DISK_COLOR);
+			        g.setColor(DISK_COLOR);
+				if (tower == fromTower && j == 1)
+				    {g.setColor(SELECTED_DISK_COLOR);}
     				g.fillRect(x,y,diskWidth,DISK_HEIGHT);
     			}
     		}
@@ -194,6 +197,7 @@ public class GamePanel extends JPanel {
 
     		if(fromTower == 0) {
     			fromTower = selectedTower;
+			GamePanel.this.repaint();
     			return;
     		}
 
