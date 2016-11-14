@@ -22,7 +22,7 @@ public class GamePanel extends JPanel {
 
     private final int DISK_HEIGHT;//height of each disk
     private final int DISK_OFFSET;//vertical space between each disk
-    private final int TOWER_WIDTH;//Width of the tower
+    private int TOWER_WIDTH;//Width of the tower
     private final int TOWER_OFFSET;//Horizontal space between towers
     private final int INITIAL_OFFSET;//the offset from the top of the panel
     private int sideOffset;//The horizontal space between the side towers and the side of the Panel
@@ -43,7 +43,6 @@ public class GamePanel extends JPanel {
     	super();
 		GameGUI.pauseTimer.addMouseListener(new PauseTimerListener());
    		GameGUI.resetGame.addMouseListener(new ResetGameListener());
-    	TOWER_WIDTH = 80;
     	DISK_HEIGHT = 10;
     	TOWER_OFFSET = 20;
     	DISK_OFFSET = 20;
@@ -58,6 +57,7 @@ public class GamePanel extends JPanel {
     	if (towers == null) {
     		return;
     	} else {
+	    TOWER_WIDTH = 80 + maxDisk * 10;
     		sideOffset = (this.getWidth()-(3*TOWER_WIDTH) - (2 * TOWER_OFFSET))/2;
 
     		for(int tower = 1; tower <= towers.size(); tower++) {

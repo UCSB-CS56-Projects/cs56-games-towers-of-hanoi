@@ -47,7 +47,7 @@ public class GUIMain {
 	}
 	
 	// Contents of dialogue
-	final String[] options = {"Play"};
+	final String[] options = {"Play","Main"};
 	final JPanel panel = new JPanel();
 	JLabel lbl = new JLabel("Number of Disks (3 to 25): ");
 	final JTextField txt = new JTextField(10);
@@ -91,19 +91,29 @@ public class GUIMain {
 		    // frame.repaint();
 		    frame.setVisible(false);
 		    int numberOfDisks = 0;
-		    JOptionPane.showMessageDialog(frame,"Tower of Hanoi: \n\nThe goal of this game is to move all the disks from the leftmost tower to either the middle tower or rightmost tower, adhering to the following rules:\n   1) Move only one disk at a time.\n   2) A larger disk may not be placed ontop of a smaller disk.\n   3) All disks, except the one being moved, must be on a tower. \n\n                                                                                         Please press the OK button to continue");
+		    int choice = JOptionPane.showOptionDialog(null,"Tower of Hanoi: \n\nThe goal of this game is to move all the disks from the leftmost tower to either the middle tower or rightmost tower, adhering to the following rules:\n   1) Move only one disk at a time.\n   2) A larger disk may not be placed ontop of a smaller disk.\n   3) All disks, except the one being moved, must be on a tower. \n\n Please press the OK button to continue","CHOOSE AN OPTION?", JOptionPane.YES_NO_OPTION,JOptionPane.INFORMATION_MESSAGE, null, new Object[]{"Yes","No"}, null);
+
+		    if(choice ==1){
+			frame.removeAll();
+			frame.validate();
+			frame.setVisible(false);
+			GUIMain.startGame();
+			return;
+		    }
 		    
 			
 	// Keep looping through the dialogue until a valid number is entered
 	while (numberOfDisks > 25 || numberOfDisks < 3) {
 	    
 	    // Show the dialogue
-	    int userResponse = JOptionPane.showOptionDialog(null, panel, "Towers of Hanoi", JOptionPane.NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, null);
+	    int userResponse = JOptionPane.showOptionDialog(null, panel, "Towers of Hanoi", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, null);
 	    
-	    if (userResponse == JOptionPane.CLOSED_OPTION) {
-		
-            	// User clicked the 'x' button
-            	System.exit(0);
+	    if (userResponse == 1) {
+		frame.removeAll();
+		frame.validate();
+	     	frame.setVisible(false);
+       		GUIMain.startGame();
+		return;	
 	    }
 	    
 	    // Try to parse the number they entered
