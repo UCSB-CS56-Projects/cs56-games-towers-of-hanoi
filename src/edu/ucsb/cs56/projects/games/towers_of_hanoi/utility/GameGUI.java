@@ -18,6 +18,7 @@ public class GameGUI {
     private JPanel timePanel;
     private JLabel timeDisplay;
     private JFrame frame;
+    private static JFrame Secondframe;
     private JPanel mainTimePanel;
     public static GamePanel gamePanel;
     public static JLabel countDisplay;
@@ -32,13 +33,11 @@ public class GameGUI {
           
 	System.out.flush();
 	timeDisplay = new JLabel("Time:"+ "0",JLabel.CENTER);
-	timeDisplay.setForeground(Color.black);
-	timeDisplay.setBackground(Color.white);
+	timeDisplay.setForeground(Color.black);	timeDisplay.setBackground(Color.white);
 	timeDisplay.setOpaque(true);
 	timeDisplay.setFont(new Font("SansSerif", Font.BOLD, 20));
 	timeDisplay.setPreferredSize(new Dimension(100, 50));
-	
-	countDisplay = new JLabel("Move Count: " + GamePanel.state.getNumOfMoves(), JLabel.CENTER);
+      	countDisplay = new JLabel("Move Count: " + GamePanel.state.getNumOfMoves(), JLabel.CENTER);
 	countDisplay.setForeground(Color.WHITE);
 	countDisplay.setBackground(Color.DARK_GRAY);
 	countDisplay.setOpaque(true);
@@ -47,14 +46,28 @@ public class GameGUI {
 
 	pauseTimer = new JButton(PAUSE_STR_LIT);
 	resetGame = new JButton(RESET_STR_LIT);
-
+	JButton gameOption = new JButton("Option");
+	resetGame.setActionCommand("Action");
+	gameOption.addActionListener(new ActionListener(){
+		public void actionPerformed(ActionEvent e)
+		{
+		    Secondframe = new JFrame("Game Option");
+		    Secondframe.add(pauseTimer,BorderLayout.WEST);
+		    Secondframe.add(resetGame,BorderLayout.EAST);
+		    Secondframe.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		    Secondframe.setSize(300,100);
+		    Secondframe.setLocationRelativeTo(null);
+		    Secondframe.setVisible(true);
+		    }});
+		
 	mainTimePanel = new JPanel(new BorderLayout());
 	timePanel = new JPanel(new BorderLayout());
 	timePanel.add(countDisplay, BorderLayout.NORTH);
 	timePanel.add(timeDisplay, BorderLayout.CENTER);
-	timePanel.add(pauseTimer, BorderLayout.WEST);
-	timePanel.add(resetGame, BorderLayout.EAST);
-
+	//timePanel.add(pauseTimer, BorderLayout.WEST);
+	//timePanel.add(resetGame, BorderLayout.EAST);
+	timePanel.add(gameOption, BorderLayout.WEST);
+	
 	gameTimer = new HanoiTimer(timeDisplay);
 	gameTimer.SetTimeElapsedText();
 	mainTimePanel.add(timePanel, BorderLayout.NORTH);
@@ -86,5 +99,8 @@ public class GameGUI {
     public void close() {
 	frame.dispose();
     }
+    public static void closeOption(){
+	Secondframe.dispose();}
+	
 }
      
