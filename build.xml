@@ -10,7 +10,7 @@
    <property name="projectName" value="cs56-games-towers-of-hanoi" /> 
    <property name="javadocDest" value="${webRoot}/${projectName}/javadoc" /> 
    <property name="javadocURL" value="${webBaseURL}/${projectName}/javadoc" /> 
-   <property name="javadocLink" value="http://java.sun.com/javase/7/docs/api/" />
+   <property name="javadocLink" value="http://java.sun.com/javase/8/docs/api/" />
    <property name="packagePrefix" value="edu.ucsb.cs56.projects.games.towers_of_hanoi" />
    <property name="viewPackagePrefix" value="${packagePrefix}.view" />
 
@@ -62,27 +62,9 @@
    <delete dir="javadoc" quiet="true" />                                                          
 
    <javadoc  destdir="javadoc" author="true" version="true" use="true" >                          
-      <fileset dir="src" includes="**/*.java"/>                                                                                                                                     
-   </javadoc>                                                                                     
-                                                                                                  
-   <!-- delete the old javadoc -->                                                                
-   <delete quiet="true" dir="${javadocDest}" />                                                   
-                                                                                                  
-   <!-- copy everything you just made to the javadoc destination, and then make it readable -->   
-                                                                                                  
-   <copy todir="${javadocDest}" >                                                                 
-     <fileset dir="javadoc"/>                                                                     
-   </copy>                                                                                        
-                                                                                                  
-   <!-- Note: this only does the chmod command on the                                             
-        javadoc subdirectory and its contents.  You MIGHT have to                                 
-        MANUALLY do the chmod on the parent directories.  However,                                
-        you should only need to do that once. -->                                                 
-                                                                                                  
-   <chmod dir="${javadocDest}" perm="755"  type="dir" includes="**" />                            
-   <chmod dir="${javadocDest}" perm="755"  type="file" includes="**/*" />                         
-   <echo>Javadoc deployed to ${javadocURL}</echo>                                                 
-                                                                                                  
+     <fileset dir="src" includes="**/*.java"/>
+     <link href="https://docs.oracle.com/javase/8/docs/api/" />
+   </javadoc>                                                                                      
    </target>    
 
 
