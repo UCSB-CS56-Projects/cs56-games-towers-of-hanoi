@@ -48,6 +48,9 @@ public class Sound {
         clip.start();
     }
 
+    public void stop(){
+        clip.stop();
+    }
     //continuously loops the sound track
     public void loop(){
     	clip.loop(Clip.LOOP_CONTINUOUSLY);

@@ -1,5 +1,6 @@
 package edu.ucsb.cs56.projects.games.towers_of_hanoi.utility;
 
+import java.io.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -44,6 +45,7 @@ public class GamePanel extends JPanel {
     	super();
 		GameGUI.pauseTimer.addMouseListener(new PauseTimerListener());
    		GameGUI.resetGame.addMouseListener(new ResetGameListener());
+		GameGUI.saveGame.addActionListener(new SaveGameListener());
     	DISK_HEIGHT = 10;
     	TOWER_OFFSET = 20;
     	DISK_OFFSET = 20;
@@ -122,13 +124,14 @@ public class GamePanel extends JPanel {
 
 	// This assigns maxBar to the # of bars - 1 which is the same as the max # that represents a bar 
 	// (ie: max possible value returned by towers.get(a).get(b) )
-    	maxDisk = towers.get(0).size()-1;
+    	maxDisk = s.getNumOfDisks();
     	towerHeight = (maxDisk + 1) * 2 * DISK_HEIGHT;
     }
     
     public void setTimer(HanoiTimer timer) {
     	this.timer = timer;
     }
+    
     
     public class PauseTimerListener implements MouseListener {
     	@Override
@@ -166,7 +169,8 @@ public class GamePanel extends JPanel {
     	@Override
     	public void mouseClicked(MouseEvent e) {
     		//restarts the game
-    		GUIMain.startGame();
+	      	GUIMain.startGame();
+		GameGUI.closeOption();
     	}
 
     	@Override
@@ -181,6 +185,18 @@ public class GamePanel extends JPanel {
     	@Override
     	public void mouseEntered(MouseEvent e) {
     	}
+    }
+
+    private class SaveGameListener implements ActionListener{
+	public void actionPerformed (ActionEvent e){
+	    try{
+		FileOutputStream fos = new FileOutputStream("SavedGame.ser");
+		ObjectOutputStream os = new ObjectOutputStream(fos);
+		os.writeObject(state);
+		os.writeObject(timer);
+		os.close();}
+	    catch(IOException ex){ex.printStackTrace();}
+	}
     }
 
 
@@ -207,7 +223,7 @@ public class GamePanel extends JPanel {
     			try {
 		    // -1 because the game calls the towers by 1-3 while the code calls them 0-2.  This also allows for 0 to represent unassigned for this method
     				state.makeMove(fromTower-1, toTower-1);
-    				GameGUI.countDisplay.setText(state.getNumOfMoves()+"");
+    				GameGUI.countDisplay.setText("Move Count: "+state.getNumOfMoves()+"");
 		    //GameGUI.gamePanel.add(GameGUI.countDisplay, BorderLayout.CENTER);
     			} catch (TowersOfHanoiIllegalMoveException ex) {
     				JOptionPane.showMessageDialog(null, "This is an illegal move. You may not place a larger disk on top of a smaller disk.\nPlease place a smaller disk on a larger disk or place it on top of an empty tower.", "Illegal Move", JOptionPane.ERROR_MESSAGE);

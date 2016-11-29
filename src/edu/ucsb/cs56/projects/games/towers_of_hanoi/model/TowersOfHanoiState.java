@@ -1,6 +1,7 @@
 package edu.ucsb.cs56.projects.games.towers_of_hanoi.model;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.io.*;
 
 /** TowersOfHanoiState models the state of a game based on Towers of Hanoi.
     
@@ -8,7 +9,7 @@ import java.util.Arrays;
  */
 
 
-public class TowersOfHanoiState{
+public class TowersOfHanoiState implements Serializable{
     
     
     private boolean isGameSolved = false;
@@ -103,6 +104,8 @@ public class TowersOfHanoiState{
 
 	return numOfMoves;
     }
+    public int getNumOfDisks(){
+	return numOfDisks;}
 
 
     /**

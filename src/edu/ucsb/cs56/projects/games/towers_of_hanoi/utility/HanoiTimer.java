@@ -3,7 +3,7 @@ package edu.ucsb.cs56.projects.games.towers_of_hanoi.utility;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.GregorianCalendar;
-
+import java.io.*;
 import javax.swing.JLabel;
 
 /**
@@ -11,12 +11,13 @@ import javax.swing.JLabel;
  * This is a timer class that will begin running as soon as it is created. A JLabel is required for it to display in format mm:ss
  * @author Aaron Wexler / amwexler
  */
-public class HanoiTimer {
+public class HanoiTimer implements Serializable {
     private GregorianCalendar gc = new GregorianCalendar();
-    private long startTime = 0;
+    private transient long startTime = 0;
     private long pauseTime = 0;
     private long eTime = 0;
-    private JLabel timeLabel = null;
+    private long totalTime = 0;
+    private transient JLabel timeLabel = null;
     private boolean stopped = true;
     private boolean paused = false;
     private boolean started = false;
@@ -24,10 +25,27 @@ public class HanoiTimer {
      * Consructs a new HanoiTimer and starts the timer running.
      * @param label The label that will receive the formatted elapsed time.
      */
-    public HanoiTimer(JLabel label) {
-     timeLabel = label;
+    public HanoiTimer() {
+	//timeLabel = label;
      Timer timer = new Timer();
      timer.schedule(new TimerTask() {
+
+      @Override
+      public void run() {
+          updateTimer();
+      }
+    }, 0, 1000);
+     start();
+    }
+    public HanoiTimer(HanoiTimer t){
+	pauseTime = t.getPauseTime();
+	eTime = t.geteTime();
+	totalTime = t.getTotalTime();
+	stopped = t.getStopped();
+	paused = t.getPaused();
+	started = t.getStarted();
+	Timer timer = new Timer();
+	timer.schedule(new TimerTask() {
 
       @Override
       public void run() {
@@ -50,13 +68,33 @@ public class HanoiTimer {
        this.stop();
        this.start();
    }
-
+    public void setstartTime(){
+	startTime = System.currentTimeMillis() - totalTime;}
+    public void setLabel(JLabel label){
+	timeLabel = label;}
+    public long getTotalTime(){
+	return totalTime;
+    }
+    public long getStartTime(){
+	return startTime;}
+    public JLabel getLabel(){
+	return timeLabel;}
+    public long getPauseTime(){
+	return pauseTime;}
+    public long geteTime(){
+	return eTime;}
+    public boolean getStopped(){
+	return stopped;}
+    public boolean getPaused(){
+	return paused;}
+    public boolean getStarted(){
+	return started;}
     /**
      * If stopped, the timer will restart. Otherwise, do nothing
      */
     public void start() {
-       if(!stopped)return;
-       startTime = System.currentTimeMillis();
+	if(!stopped)return;
+       startTime = System.currentTimeMillis() - totalTime;
        stopped = false;
        paused = false;
        started = true;
@@ -101,14 +139,17 @@ public class HanoiTimer {
         else if(paused == false && stopped == false && started == true){
             //when the game first starts, when pause button has not been used yet
             gc.setTimeInMillis(System.currentTimeMillis() - startTime);
+	    totalTime = System.currentTimeMillis() - startTime;
         }
         else if(paused == true && stopped == false && started == false){
             //when you press the pause button
             gc.setTimeInMillis(pauseTime);
+	    totalTime  = pauseTime;
         }
         else if(paused == false && stopped == false && started == false){
             //when you press resume
             gc.setTimeInMillis(System.currentTimeMillis() - startTime - (eTime - pauseTime) );
+	    totalTime = System.currentTimeMillis() - startTime - (eTime - pauseTime);
         }
 
         //This converts the computed time into a string

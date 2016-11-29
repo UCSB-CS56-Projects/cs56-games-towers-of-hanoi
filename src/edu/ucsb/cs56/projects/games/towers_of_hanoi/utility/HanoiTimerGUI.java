@@ -36,7 +36,8 @@ public class HanoiTimerGUI {
 		
 		TimePanel = new JPanel(new BorderLayout());
 		TimePanel.add(TimeDisplay, BorderLayout.CENTER);
-		GameTimer = new HanoiTimer(TimeDisplay);
+		GameTimer = new HanoiTimer();
+		GameTimer.setLabel(TimeDisplay);
 		GameTimer.SetTimeElapsedText();
 		
 		JButton RestartButton = new JButton("Restart Timer");
