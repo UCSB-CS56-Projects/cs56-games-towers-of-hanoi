@@ -28,7 +28,7 @@ public class GamePanel extends JPanel {
     private final int INITIAL_OFFSET;//the offset from the top of the panel
     private int sideOffset;//The horizontal space between the side towers and the side of the Panel
     private final Color TOWER_COLOR = new Color(0xe4cbab);//color of towers
-    private final Color DISK_COLOR = new Color(0x8c4f00);//color of disks
+    //private Color DISK_COLOR;//color of disks
     private final Color SELECTED_DISK_COLOR = new Color(0x21da35);
     private final Color TOWER_ON_COLOR = new Color(0xccffff);//color of tower you clicked on
     private int maxDisk;//value of the biggest disk possible on the towers
@@ -108,15 +108,26 @@ public class GamePanel extends JPanel {
     				int diskWidth = TOWER_WIDTH - (TOWER_WIDTH/(maxDisk+1))*(maxDisk- towers.get(tower-1).get(j-1)); 
 
     				int x = towerX+((TOWER_WIDTH-diskWidth)/2);
-			        g.setColor(DISK_COLOR);
+			        g.setColor(GUIMain.gamesetting.getColor());
 				if (tower == fromTower && j == 1)
 				    {g.setColor(SELECTED_DISK_COLOR);}
-    				g.fillRect(x,y,diskWidth,DISK_HEIGHT);
+    				//g.fillRoundRect(x,y,diskWidth,DISK_HEIGHT, 10,10);
+				drawDisk(g, GUIMain.gamesetting.getDiskType(),x,y,diskWidth,DISK_HEIGHT);
     			}
     		}
     	}
     }
-    
+    public void drawDisk(Graphics g, String DiskType, int x, int y, int diskWidth, int diskHeight){
+	switch (DiskType){
+	case "Block":
+	    g.fillRect(x,y,diskWidth,diskHeight);
+	    break;
+	case "Round":
+	    g.fillRoundRect(x,y,diskWidth,diskHeight,10,10);
+	    break;}
+	    
+	
+    }
     public void setState(TowersOfHanoiState s) {
 
     	state = s;

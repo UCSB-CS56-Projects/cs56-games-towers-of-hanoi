@@ -27,6 +27,8 @@ public class GamesettingFrame{
 			OnOrOff.setText("On");
 		    else
 			OnOrOff.setText("Off");
+		    JLabel DiskType = new JLabel(gamesetting.getDiskType());
+		    JLabel ColorS = new JLabel(gamesetting.getColorS());
 		    instruction.addActionListener(new ActionListener(){
 			    public void actionPerformed(ActionEvent e)
 			    {if (OnOrOff.getText() == "On")
@@ -61,13 +63,26 @@ public class GamesettingFrame{
         				GameGUI.song.loop();}
 			    }
 			});
-				
-		    settingFrame.setLayout(new GridLayout(3,2,20,10));
+		    JButton Shape = new JButton("Shape");
+		    Shape.addActionListener(new ActionListener(){
+			    public void actionPerformed(ActionEvent e)
+			    {gamesetting.setDiskType();
+				DiskType.setText(gamesetting.getDiskType());}});
+		    JButton Color = new JButton("Color");
+		    Color.addActionListener(new ActionListener(){
+			    public void actionPerformed(ActionEvent e)
+			    {gamesetting.setColor();
+				ColorS.setText(gamesetting.getColorS());}});
+		    settingFrame.setLayout(new GridLayout(5,2,20,10));
 		    settingFrame.add(instruction);
 		    settingFrame.add(OnOrOff);
                     settingFrame.add(Music);
 		    settingFrame.add(PlayOrStop);
+		    settingFrame.add(Shape);
+		    settingFrame.add(DiskType);
+		    settingFrame.add(Color);
+		    settingFrame.add(ColorS);
 		    settingFrame.add(Save);
-		    settingFrame.setSize(400,100);
+		    settingFrame.setSize(400,200);
 		    settingFrame.setLocationRelativeTo(null);
 		    settingFrame.setVisible(true);}}
