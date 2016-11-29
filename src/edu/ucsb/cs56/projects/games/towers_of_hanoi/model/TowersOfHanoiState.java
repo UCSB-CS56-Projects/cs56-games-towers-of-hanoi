@@ -147,6 +147,7 @@ public class TowersOfHanoiState implements Serializable{
      Given the index number of two towers, this method will move the top disk from one tower to the other. Throws input/output exception if move is illegal.
      @param indexFromTower is an integer representing which tower you want to move a disk from.
      @param indexToTower is an integer representing which tower you want to move a disk to.
+     @throws TowersOfHanoiState.TowersOfHanoiIllegalMoveException maybe thrown because the test may produce an illegal move in the game. 
      */
 
     public void makeMove(int indexFromTower, int indexToTower) throws TowersOfHanoiIllegalMoveException {
