@@ -21,10 +21,7 @@ public class HanoiTimer implements Serializable {
     private boolean stopped = true;
     private boolean paused = false;
     private boolean started = false;
-    /**
-     * Consructs a new HanoiTimer and starts the timer running.
-     * @param label The label that will receive the formatted elapsed time.
-     */
+
     public HanoiTimer() {
 	//timeLabel = label;
      Timer timer = new Timer();
