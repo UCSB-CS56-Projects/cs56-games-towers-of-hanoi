@@ -1,0 +1,21 @@
+#Diego P., Vanessa M.
+1. Tower of Hanoi is a game where a player has a number of disks and has to move the disks which are originally stacked from biggest to the smallest disks on top and move the stack to one of two boxes. The player can only move one disk at a time to the other boxes and cannot stack a bigger disk onto a smaller disk. Once the player has the original stack onto a different box, the player wins. 
+2. As a user I can play the game with a range of 3 to 25 disks, control the color and shape of the disks, control the music playing, and continue from a saved game session. 
+3. The software seems to run fine, the previous students said that the software filled the basic requirements of the game. As mentioned above, the software allows a user to play the game of Tower of Hanoi with disks ranging from 3 to 25. The software allows some customization with music, color, and shape of the disks. Software also allows one saved state of a previous game to be played later on.  
+4. A. As a user I can save a game so I can play at a later time, but I would like to have more than one saved game. 
+   B. As a user I can dive straight into gameplay, but I would like to have the option of a tutorial that shows exactly how to play the game.
+   C. As a user I can go into the option settings but the time does not stop immediately and I can still see the screen when I am in the option setting, make sure the time stops for accurate results. 
+   D. As a user I can try to get the most optimal solution but I cannot try to beat my own high score of moves and times, adding a highscore list would improve the game. 
+
+5. The README.md file is in a good state as it explains every feature and button of the game in its current state. The descriptions are very straight foward and explain the general overview of the game, it would have been nice to go into some of the changes each of the teams have made. There are also links in the README.md file that are not formatted correctly. 
+
+6. The targets have the necessary descriptions and there is not old legacy JWS stuff that needs to be removed. 
+
+7. There are enough issues so we could earn 1000 points working on this project and the issues are clear enough to know what expectations are. 
+
+8. The issues I had added were already listed except for a guided tutorial. 
+
+9. The TowerOfHanoiState class is written very clearly with lots of comments, as well as its tests class, though there could be more tests trying out a different amount of disks and moves. The classes in the Utility folder are a bit less cleaner and provide less comments so improvements can be made there. Though the classes in the utility folder were seperated by their main function and were clear to seperate and how they relate to one and another. If we had to send one screenfull of text, it would be the TowerOfHanoiState class as that is were the code comes together. 
+
+10. As said before, the tests do test out individual methods, but there has to be more tests on different amount of disks and Illegal moves. There are opportunities to provide more tests as the 
+amount each method gets tested is no greater than two tests. When going back and making more tests, we will make sure each method gets tested at least 3 times. 

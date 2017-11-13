@@ -68,6 +68,7 @@ public class TowersOfHanoiState implements Serializable{
 	    towers.add(1, new ArrayList<Integer>(3));
 	    towers.add(2, new ArrayList<Integer>(3));
 	    this.numOfDisks = 3;
+	    this.numOfMoves = 0;
 	}
 	
 	else { // else user input is number of disks
@@ -80,6 +81,7 @@ public class TowersOfHanoiState implements Serializable{
 		towers.get(0).add(x);
 	    }
 	    this.numOfDisks = numOfDisks;
+	    this.numOfMoves = 0;
 	}
 	
     }
@@ -99,7 +101,10 @@ public class TowersOfHanoiState implements Serializable{
      Getter method which returns the integer value numOfMoves.
      @return integer value numOfMoves in TowersOfHanoiState
      */
-
+    public int setNumOfMoves(int num){
+    	numOfMoves = num;
+	return numOfMoves;
+	}
     public int getNumOfMoves(){
 
 	return numOfMoves;
@@ -270,6 +275,7 @@ public class TowersOfHanoiState implements Serializable{
     	int optimalSolution = (int) Math.pow(2,numOfDisks) - 1; // 2^n - 1 is the optimal solution for the game
     	System.out.println("Congratulations! You solved the game in " + this.getNumOfMoves()
                                + " steps. Optimal solution would have been " + optimalSolution
-			   + " steps." ); 
+			   + " steps." );
+        	
     }   
 }

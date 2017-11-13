@@ -266,7 +266,8 @@ public class GamePanel extends JPanel {
 		    
 		    if (selectedValue.equals("Replay")) {
 		    	System.out.println("Selected Replay");
-		    	GUIMain.startGame();
+		        state.setNumOfMoves(0);
+			GUIMain.startGame();
 		    } else {
 		    	System.out.println("Selected Quit");
 		    	System.exit(0);
