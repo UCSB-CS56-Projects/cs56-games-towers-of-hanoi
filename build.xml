@@ -21,13 +21,12 @@
          <pathelement location="lib/junit-4.8.2.jar"/>
 </path> 
 
-  <target name="compile" description="compile the projects" >  
-   <mkdir dir="build" />
-   <javac srcdir="src" destdir="build" debug="true" debuglevel="lines,vars,source" includeantruntime="false">     
-                                                                                                                       <classpath refid="project.class.path" />                       
-     
-   </javac>       
-  </target>
+<target name="compile" description="compile the projects" >
+  <mkdir dir="build" />
+  <javac srcdir="src" destdir="build" debug="true" debuglevel="lines,vars,source" includeantruntime="false">
+  <classpath refid="project.class.path" />                       
+  </javac>       
+</target>
 
 <target name="run-timer" depends="compile" description="run the timer demo">
   <!-- You can use exec here, depending on your needs -->
@@ -36,14 +35,14 @@
 </target>
 
 <target name="run-GUI" depends="compile" description="run the game in full GUI">
-	<java classname="${timerPackagePrefix}.GUIMain" classpathref="project.class.path" fork="true">
-	</java>
+  <java classname="${timerPackagePrefix}.GUIMain" classpathref="project.class.path" fork="true">
+  </java>
 </target>
 
 <target name="run" depends="compile, input-runargs" description="run the project">
   <!-- You can use exec here, depending on your needs -->
   <java classname="${viewPackagePrefix}.CmdLineHanoi" classpathref="project.class.path" fork="true">
-    <arg line="${args}"/>
+  <arg line="${args}"/>
   </java>
 </target>
 
@@ -51,16 +50,18 @@
   <input addProperty="args" message="Enter the number of disks, Between 3 and 25:"/>
 </target>
 
-
-  <target name="clean" description="delete unnecessary files and directories">
-    <delete dir="build" quiet="true" />
-    <delete dir="javadoc" quiet="true" />
-  </target>
+<target name="clean" description="delete unnecessary files and directories">
+  <delete dir="build" quiet="true" />
+  <delete dir="javadoc" quiet="true" />
+</target>
   <property name ="javadoc_path" location = "javadoc"/>
   <property name ="public_javadoc_path" location= "../cs56-games-towers-of-hanoi-javadoc/javadoc"/>  
-  <target name="javadoc" depends="compile" description = "generate javadoc">	                 <delete dir="javadoc" quiet="true" />                                                       <javadoc  destdir="javadoc" author="true" version="true" use="true" >                            <fileset dir="src" includes="**/*.java"/>
-     	<link href="https://docs.oracle.com/javase/8/docs/api/" />
-</javadoc>                                                    
+<target name="javadoc" depends="compile" description = "generate javadoc">
+  <delete dir="javadoc" quiet="true" />
+  <javadoc  destdir="javadoc" author="true" version="true" use="true" >
+  <fileset dir="src" includes="**/*.java"/>
+  <link href="https://docs.oracle.com/javase/8/docs/api/" />
+  </javadoc>                                                    
 	<echo>
 		javadoc written to file://${javadoc_path}/index.html
 		copying to ${public_javadoc_path}/index.html
@@ -79,21 +80,17 @@
 	</echo>
    </target>    
 
-
   <target name="test" depends="compile" description="tests the project">
 
     <junit haltonerror="no" haltonfailure="no">
        <classpath refid="project.class.path" />
-
        <batchtest fork="yes">
           <fileset dir="src">
             <!-- this will pick up every class with a name ending in Test -->
             <include name="**/*Test.java"/>
           </fileset>
        </batchtest>
-
         <formatter type="plain" usefile="false" /> 
-       
     </junit>
   </target>
 
