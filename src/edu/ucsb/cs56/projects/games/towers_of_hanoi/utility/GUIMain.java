@@ -21,6 +21,7 @@ import javax.imageio.ImageIO;
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.*;
+import java.awt.Color;
 import edu.ucsb.cs56.projects.games.towers_of_hanoi.model.TowersOfHanoiState;
 
 
@@ -87,9 +88,11 @@ public class GUIMain {
 	panel.add(txt);
         frame.add(title);
 	frame.setSize(300,300);
+	
 	frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	frame.setLocationRelativeTo(null);
 	frame.pack();
+	
 	frame.setVisible(true);
 
 	//when you hit play, calls the dialogs preceding play

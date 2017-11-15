@@ -99,6 +99,7 @@ public class TowersOfHanoiState implements Serializable{
 
     /**
      Getter method which returns the integer value numOfMoves.
+     @param num is an integer representing number of moves made in a game session.
      @return integer value numOfMoves in TowersOfHanoiState
      */
     public int setNumOfMoves(int num){

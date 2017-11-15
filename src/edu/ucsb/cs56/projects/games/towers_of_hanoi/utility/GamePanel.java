@@ -13,6 +13,8 @@ import java.util.ArrayList;
 import edu.ucsb.cs56.projects.games.towers_of_hanoi.model.TowersOfHanoiState;
 import edu.ucsb.cs56.projects.games.towers_of_hanoi.model.TowersOfHanoiState.TowersOfHanoiIllegalMoveException;
 
+
+
 /**
  * This extends JPanel and draws the towers and disks on each tower, given a TowersOfHanoiState.  It also contains buttons to move the disks from tower to tower 
  * @author amwexler
@@ -142,6 +144,7 @@ public class GamePanel extends JPanel {
     public void setTimer(HanoiTimer timer) {
     	this.timer = timer;
     }
+  
     
     
     public class PauseTimerListener implements MouseListener {
@@ -150,6 +153,7 @@ public class GamePanel extends JPanel {
     		if(GameGUI.pauseTimer.getText().equals(GameGUI.PAUSE_STR_LIT)){
     			//Pauses the time and changes the text of button to "Resume"
     			timer.pause();
+			
     			GameGUI.pauseTimer.setText(GameGUI.RESUME_STR_LIT);
     			return;
     		}
@@ -180,7 +184,9 @@ public class GamePanel extends JPanel {
     	@Override
     	public void mouseClicked(MouseEvent e) {
     		//restarts the game
+		//state.setNumOfMoves(0);
 	      	GUIMain.startGame();
+		
 		GameGUI.closeOption();
     	}
 
@@ -292,6 +298,6 @@ public void mouseExited(MouseEvent e) {
 public void mouseEntered(MouseEvent e) {
 }
 
-}
-}
+}}
+
 

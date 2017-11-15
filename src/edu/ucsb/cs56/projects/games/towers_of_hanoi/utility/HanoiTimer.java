@@ -21,9 +21,10 @@ public class HanoiTimer implements Serializable {
     private boolean stopped = true;
     private boolean paused = false;
     private boolean started = false;
-
+    /**
+     * Consructs a new HanoiTimer and starts the timer running.
+     */
     public HanoiTimer() {
-	//timeLabel = label;
      Timer timer = new Timer();
      timer.schedule(new TimerTask() {
 
@@ -31,7 +32,7 @@ public class HanoiTimer implements Serializable {
       public void run() {
           updateTimer();
       }
-    }, 0, 1000);
+      }, 0, 1000);
      start();
     }
     public HanoiTimer(HanoiTimer t){
