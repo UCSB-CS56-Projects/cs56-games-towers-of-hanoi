@@ -26,12 +26,13 @@ public class GameGUI {
     public static JLabel countDisplay;
     public static JButton pauseTimer;
     public static JButton resetGame;
-    public static JButton saveGame;
-    public static JButton resume;
+    public static JButton quitGame;
     public static JButton help;
-    public static String RESET_STR_LIT = "Reset";
+    public static String RESET_STR_LIT = "Start over";
     public static String PAUSE_STR_LIT = "Pause"; 
     public static String RESUME_STR_LIT = "Resume"; 
+    public static String QUIT_STR_LIT = "Save and Quit";
+    public static TowersOfHanoiState state = new TowersOfHanoiState();
     public GameGUI(int window_x, int window_y) {
 	frame = new JFrame();
 	frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -51,8 +52,7 @@ public class GameGUI {
         
        pauseTimer = new JButton(PAUSE_STR_LIT);
 	resetGame = new JButton(RESET_STR_LIT);
-	resume = new JButton(RESUME_STR_LIT);
-	saveGame = new JButton("Save");
+	quitGame = new JButton(QUIT_STR_LIT);
 	help = new JButton("Help");
         help.addActionListener((e)->{int choice = JOptionPane.showOptionDialog(null,"Tower of Hanoi: \n\nThe goal of this game is to move all the disks from the leftmost tower to either the middle tower or rightmost tower, adhering to the following rules:\n   1) Move only one disk at a time.\n   2) A larger disk may not be placed ontop of a smaller disk.\n   3) All disks, except the one being moved, must be on a tower. \n\n Please press the OK button to continue","CHOOSE AN OPTION?", JOptionPane.YES_NO_OPTION,JOptionPane.INFORMATION_MESSAGE, null, new Object[]{"Ok"}, null);});
 
@@ -66,14 +66,12 @@ public class GameGUI {
 		    Secondframe.setLayout(new GridLayout(1,4,20,10));
 		    Secondframe.add(pauseTimer);
 		    Secondframe.add(resetGame);
-                    Secondframe.add(help);
-		    Secondframe.add(saveGame);
-		   
+                    Secondframe.add(help);		
+		    Secondframe.add(quitGame); 
 		    Secondframe.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		    Secondframe.setSize(600,100);
 		    Secondframe.setLocationRelativeTo(null);
 		    Secondframe.setVisible(true);
-		    Secondframe.add(resume);
  		    
 	
 		    
@@ -119,7 +117,14 @@ public class GameGUI {
     }
     
     
+    public void setNewState(TowersOfHanoiState s){
+	state = s;	
+		
+	gamePanel.setState(s);
+	s.setNumOfMoves(0);		
+    }
     public void setState(TowersOfHanoiState s){
+	state = s;		
 	gamePanel.setState(s);		
     }
     public void setTimer(HanoiTimer t){

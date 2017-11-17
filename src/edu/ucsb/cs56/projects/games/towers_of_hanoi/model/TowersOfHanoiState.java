@@ -13,8 +13,8 @@ public class TowersOfHanoiState implements Serializable{
     
     
     private boolean isGameSolved = false;
-    private int numOfMoves = 0;
-    public int numOfDisks;
+    private int numOfMoves =0;
+    public int numOfDisks = 0;
     private ArrayList<ArrayList<Integer>> towers 
 	= new ArrayList<ArrayList<Integer>>(3); //the 3 towers and their disks will be stored here
     
@@ -51,6 +51,7 @@ public class TowersOfHanoiState implements Serializable{
         towers.add(1, new ArrayList<Integer>(3));
         towers.add(2, new ArrayList<Integer>(3));
 	this.numOfDisks = 3;
+	this.numOfMoves = 0;
     }
 
     /**
@@ -93,8 +94,8 @@ public class TowersOfHanoiState implements Serializable{
     
     public boolean getIsGameSolved(){
 
-
-	return isGameSolved; 
+	
+	return isGameSolved;
     }
 
     /**
@@ -113,7 +114,7 @@ public class TowersOfHanoiState implements Serializable{
     public int getNumOfDisks(){
 	return numOfDisks;}
 
-
+    
     /**
      Getter method which returns the ArrayList reference towers.
      @return ArrayList value towers in TowersOfHanoiState
@@ -280,3 +281,4 @@ public class TowersOfHanoiState implements Serializable{
         	
     }   
 }
+	

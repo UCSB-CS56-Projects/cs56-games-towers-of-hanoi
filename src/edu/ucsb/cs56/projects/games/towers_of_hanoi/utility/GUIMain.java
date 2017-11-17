@@ -40,18 +40,20 @@ public class GUIMain {
     }
     
     public static void startGame() {
-	    try{
+	  try{
 	    ObjectInputStream is = new ObjectInputStream(new FileInputStream("GameSetting.ser"));
 	    gamesetting = (GameSetting) is.readObject();}
 	catch (Exception ex){
-	    gamesetting = new GameSetting();}
-       	if(gamesetting.getMusic()){
-	GameGUI.song.play();
+	    gamesetting = new GameSetting();}	
+	if(gamesetting.getMusic()){
+     	GameGUI.song.play();
         GameGUI.song.loop();
         }
+	
 	// This allows us to restart the game without quitting the program
 	if (gui != null){ // Is a replay, close the old game, clear the disks prompt, show it
-	    gui.close();
+	     
+	     gui.close();
 	}
 	
 	// Contents of dialogue
@@ -104,7 +106,7 @@ public class GUIMain {
 		    // title.removeAll();
 		    //frame.revalidate();
 		    // frame.repaint();
-		    frame.setVisible(false);
+		    frame.setVisible(false); 
 		    int numberOfDisks = 0;
 		    if (gamesetting.getInstruction()){
 		    int choice = JOptionPane.showOptionDialog(null,"Tower of Hanoi: \n\nThe goal of this game is to move all the disks from the leftmost tower to either the middle tower or rightmost tower, adhering to the following rules:\n   1) Move only one disk at a time.\n   2) A larger disk may not be placed ontop of a smaller disk.\n   3) All disks, except the one being moved, must be on a tower. \n\n Please press the OK button to continue","CHOOSE AN OPTION?", JOptionPane.YES_NO_OPTION,JOptionPane.INFORMATION_MESSAGE, null, new Object[]{"Yes","No"}, null);
@@ -128,7 +130,7 @@ public class GUIMain {
 		frame.removeAll();
 		frame.validate();
 	     	frame.setVisible(false);
-       		GUIMain.startGame();
+		GUIMain.startGame();
 		return;	
 	    }
 	    
@@ -147,7 +149,7 @@ public class GUIMain {
 	int winx = numberOfDisks * 50 + 200;
 	int winy = 100 + (numberOfDisks)*20;
 	gui = new GameGUI(winx, winy);
-	gui.setState(new TowersOfHanoiState(numberOfDisks));
+	gui.setNewState(new TowersOfHanoiState(numberOfDisks));
 	gui.setTimer(new HanoiTimer());
 		}		
 	    
