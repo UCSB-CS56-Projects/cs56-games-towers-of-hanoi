@@ -7,12 +7,14 @@ import java.awt.event.ActionListener;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-
+import java.awt.image.BufferedImage;
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.util.ArrayList;
+import java.util.Random;
 import edu.ucsb.cs56.projects.games.towers_of_hanoi.model.TowersOfHanoiState;
 import edu.ucsb.cs56.projects.games.towers_of_hanoi.model.TowersOfHanoiState.TowersOfHanoiIllegalMoveException;
-
+import java.awt.TexturePaint;
 
 
 /**
@@ -47,9 +49,9 @@ public class GamePanel extends JPanel {
     
     public GamePanel() {
     	super();
-		GameGUI.pauseTimer.addMouseListener(new PauseTimerListener());
+		GameGUI.continueGame.addMouseListener(new ContinueGameListener());
    		GameGUI.resetGame.addMouseListener(new ResetGameListener());
-		GameGUI.quitGame.addMouseListener(new QuitGameListener());
+		GameGUI.saveGame.addMouseListener(new SaveGameListener());
     	DISK_HEIGHT = 10;
     	TOWER_OFFSET = 20;
     	DISK_OFFSET = 20;
@@ -128,49 +130,81 @@ public class GamePanel extends JPanel {
 	    break;
 	case "Round":
 	    g.fillRoundRect(x,y,diskWidth,diskHeight,10,10);
+	    break;
+	case "Wood":
+	    try{
+	    BufferedImage img = ImageIO.read(new File("src/edu/ucsb/cs56/projects/games/towers_of_hanoi/utility/images/wood.png"));
+	    TexturePaint woodDisk = new TexturePaint(img,new Rectangle(0,0,diskWidth,diskHeight));
+	    Graphics2D g2 = (Graphics2D) g;
+	    g2.setPaint(woodDisk);
+	    g = (Graphics) g2;
+	    g.fillRect(x,y,diskWidth,diskHeight);
+	     } 
+	    catch(IOException ioe) {
+		System.err.println("yo, error foo");
+		System.exit(0);
+	}
+	    break;
+	case "Brick":	    
+	    try{
+	    BufferedImage img = ImageIO.read(new File("src/edu/ucsb/cs56/projects/games/towers_of_hanoi/utility/images/brick.png"));
+	    TexturePaint brickDisk = new TexturePaint(img,new Rectangle(0,0,diskWidth,diskHeight));
+	    Graphics2D g2 = (Graphics2D) g;
+	    g2.setPaint(brickDisk);
+	    g = (Graphics) g2;
+	    g.fillRect(x,y,diskWidth,diskHeight);
+	     } 
+	    catch(IOException ioe) {
+		System.err.println("yo, error foo");
+		System.exit(0);
+	}
+	    break;
+	case "Stone":	    
+	    try{
+	    BufferedImage img = ImageIO.read(new File("src/edu/ucsb/cs56/projects/games/towers_of_hanoi/utility/images/stone.jpg"));
+	    TexturePaint stoneDisk = new TexturePaint(img,new Rectangle(0,0,diskWidth,diskHeight));
+	    Graphics2D g2 = (Graphics2D) g;
+	    g2.setPaint(stoneDisk);
+	    g = (Graphics) g2;
+	    g.fillRect(x,y,diskWidth,diskHeight);
+	     } 
+	    catch(IOException ioe) {
+		System.err.println("yo, error foo");
+		System.exit(0);
+	}
 	    break;}
+	
+	
 	    
 	
     }
     public void setState(TowersOfHanoiState s) {
-	
+	int num = state.getNumOfMoves(); 
     	state = s;
     	towers = s.getTowers();
-	s.setNumOfMoves(0);
+	if(s.getNewGame() == false){
+	s.setNumOfMoves(num);}
 	// This assigns maxBar to the # of bars - 1 which is the same as the max # that represents a bar 
-	// (ie: max possible value returned by towers.get(a).get(b) )
-    	maxDisk = s.getNumOfDisks();
-	moveCount = s.getNumOfMoves();
-	if (moveCount > 0) {
-		newGame = false;}
-	else{
-		newGame = true; 
-             }
+	// (ie: max possible value returned by towers.get(a).get(b) )  
+   	maxDisk = s.getNumOfDisks();
     	towerHeight = (maxDisk + 1) * 2 * DISK_HEIGHT;
     }
+
     
     public void setTimer(HanoiTimer timer) {
     	this.timer = timer;
     }
     
     
-    public class PauseTimerListener implements MouseListener {
+    public class ContinueGameListener implements MouseListener {
     	@Override
     	public void mouseClicked(MouseEvent e) {
-    		if(GameGUI.pauseTimer.getText().equals(GameGUI.PAUSE_STR_LIT)){
-    			//Pauses the time and changes the text of button to "Resume"
-    			timer.pause();
+    		//resume time	
+		timer.resume();
+		//close option frame
+		GameGUI.closeOption();
+		//open game frame
 			
-    			GameGUI.pauseTimer.setText(GameGUI.RESUME_STR_LIT);
-    			return;
-    		}
-
-    		else if(GameGUI.pauseTimer.getText().equals(GameGUI.RESUME_STR_LIT)){
-    			//Resumes the time and changes the text of button to "Pause"
-    			timer.resume();
-    			GameGUI.pauseTimer.setText(GameGUI.PAUSE_STR_LIT);
-    			return;
-    		}
     	}
 
     	@Override
@@ -190,21 +224,12 @@ public class GamePanel extends JPanel {
     public class ResetGameListener implements MouseListener {
     	@Override
     	public void mouseClicked(MouseEvent e) {
-		 try{
-		FileOutputStream fos = new FileOutputStream("SavedGame.ser");
-		ObjectOutputStream os = new ObjectOutputStream(fos);
-		os.close(); }
-	    catch(IOException ex){ex.printStackTrace();}
-		state.setNumOfMoves(0);
-		GUIMain.startGame();
-		GameGUI.closeOption();
-	
-		
-
+		state.setNumOfMoves(0);	
+		GUIMain.startGame();	
+		savedSessionFrame.gui.close();
+		GameGUI.closeOption();		        
+		timer.resume();	
     	}
-
-
-
 
     	@Override
     	public void mouseReleased(MouseEvent e) {
@@ -219,25 +244,24 @@ public class GamePanel extends JPanel {
     	public void mouseEntered(MouseEvent e) {
     	}
     }
-   public class QuitGameListener implements MouseListener {
+       public class SaveGameListener implements MouseListener {
     	@Override
-    	public void mouseClicked(MouseEvent e) {
-	      	 try{
-		FileOutputStream fos = new FileOutputStream("SavedGame.ser");
-		ObjectOutputStream os = new ObjectOutputStream(fos);
-		os.writeObject(state);
-		os.writeObject(timer);
-		os.close();}
-	    catch(IOException ex){ex.printStackTrace();}
+    	public void mouseClicked(MouseEvent e) {			
+		//new way of saving 
+		Random rand = new Random();
+		int n = rand.nextInt(3) + 1;
 
-		GUIMain.startGame();
-		GameGUI.closeOption();
+		String fileName1 = "SavedGame1.ser";
+		String fileName2 = "SavedGame2.ser";
+		String fileName3 = "SavedGame3.ser";
+		String fileName = "";
+		if (n == 1) {fileName = fileName1;}
+		else if( n == 2) { fileName = fileName2;}
+		else{ fileName = fileName3;}
+		int moveCount = state.getNumOfMoves();
+		ResourceManager.save(state,timer,moveCount,fileName);		
+       } 
 		
-	  
-	}   
-		
-
-    	
 	@Override
     	public void mouseReleased(MouseEvent e) {
     	}
@@ -250,26 +274,19 @@ public class GamePanel extends JPanel {
     	@Override
     	public void mouseEntered(MouseEvent e) {
     	}
-    }
-
- 
+   	}   
     private class TowerPanelListener implements MouseListener {
     	int selectedTower;
-
-
     	public TowerPanelListener(int selectedTower){
     		this.selectedTower = selectedTower;
     	}
-
     	@Override
     	public void mouseClicked(MouseEvent e) {
-
     		if(fromTower == 0) {
     			fromTower = selectedTower;
 			GamePanel.this.repaint();
     			return;
     		}
-//state.getNumOfMoves()
     		if(toTower == 0){
     			toTower = selectedTower;
 
@@ -308,6 +325,7 @@ public class GamePanel extends JPanel {
 		    
 		    if (selectedValue.equals("Replay")) {
 		    	System.out.println("Selected Replay");
+			state.setNumOfMoves(0);			
 			GUIMain.startGame();
 		    } else {
 		    	System.out.println("Selected Quit");

@@ -27,7 +27,6 @@ public class HanoiTimer implements Serializable {
     public HanoiTimer() {
      Timer timer = new Timer();
      timer.schedule(new TimerTask() {
-
       @Override
       public void run() {
           updateTimer();
@@ -44,7 +43,6 @@ public class HanoiTimer implements Serializable {
 	started = t.getStarted();
 	Timer timer = new Timer();
 	timer.schedule(new TimerTask() {
-
       @Override
       public void run() {
           updateTimer();
@@ -52,7 +50,6 @@ public class HanoiTimer implements Serializable {
     }, 0, 1000);
      start();
     }
-
     public void updateTimer() {
        if(timeLabel != null) {
            this.SetTimeElapsedText();
@@ -97,14 +94,12 @@ public class HanoiTimer implements Serializable {
        paused = false;
        started = true;
    }
-
     /**
      * Stops processing of timer events
      */
     public void stop() {
        stopped = true;	
     }
-
     public void pause() {
         started = false;
 

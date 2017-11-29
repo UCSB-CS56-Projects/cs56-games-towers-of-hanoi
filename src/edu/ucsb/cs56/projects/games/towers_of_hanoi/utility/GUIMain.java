@@ -31,31 +31,27 @@ import edu.ucsb.cs56.projects.games.towers_of_hanoi.model.TowersOfHanoiState;
  *
  */
 
-public class GUIMain {
-    
+public class GUIMain { 
     public static GameGUI gui;
+
     public static GameSetting gamesetting;
-    public static void main (String [] args){
+    public static void main (String [] args){	
 	startGame();
     }
-    
     public static void startGame() {
 	  try{
 	    ObjectInputStream is = new ObjectInputStream(new FileInputStream("GameSetting.ser"));
 	    gamesetting = (GameSetting) is.readObject();}
 	catch (Exception ex){
-	    gamesetting = new GameSetting();}	
-	if(gamesetting.getMusic()){
-     	GameGUI.song.play();
-        GameGUI.song.loop();
-        }
-	
+		gamesetting = new GameSetting();}	
+		if(gamesetting.getMusic()){
+     			GameGUI.song.play();
+        		GameGUI.song.loop();
+        }	
 	// This allows us to restart the game without quitting the program
 	if (gui != null){ // Is a replay, close the old game, clear the disks prompt, show it
-	     
 	     gui.close();
-	}
-	
+	}	
 	// Contents of dialogue
 	final String[] options = {"Play","Main"};
 	final JPanel panel = new JPanel();
@@ -72,35 +68,28 @@ public class GUIMain {
 	buttons.add(continuebutton);
 	buttons.add(setting);
 	buttons.add(exit);
-	
 	title.setLayout( new BorderLayout());
-
 	final JFrame frame = new JFrame();
 	try{
-	BufferedImage myPicture = ImageIO.read(new File("src/edu/ucsb/cs56/projects/games/towers_of_hanoi/utility/images/ToHtitle.png"));
-	JLabel picLabel = new JLabel (new ImageIcon(myPicture));
-
-	title.add(picLabel, BorderLayout.NORTH);
-	title.add(buttons, BorderLayout.SOUTH);
-	}catch(IOException ioe) {
-	    System.err.println("yo, error foo");
-	    System.exit(0);
+		BufferedImage myPicture = ImageIO.read(new File("src/edu/ucsb/cs56/projects/games/towers_of_hanoi/utility/images/ToHtitle.png"));
+		JLabel picLabel = new JLabel (new ImageIcon(myPicture));
+		title.add(picLabel, BorderLayout.NORTH);
+		title.add(buttons, BorderLayout.SOUTH);
+	}
+	catch(IOException ioe) {
+		System.err.println("yo, error foo");
+		System.exit(0);
 	}
        	panel.add(lbl);
 	panel.add(txt);
         frame.add(title);
 	frame.setSize(300,300);
-	
 	frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	frame.setLocationRelativeTo(null);
 	frame.pack();
-	
 	frame.setVisible(true);
-
 	//when you hit play, calls the dialogs preceding play
-
         playbutton.addActionListener(new ActionListener(){
-
 		public void actionPerformed(ActionEvent e)
 		{
 		    // title.removeAll();
@@ -120,58 +109,51 @@ public class GUIMain {
 		    }}
 		    
 			
-	// Keep looping through the dialogue until a valid number is entered
-	while (numberOfDisks > 25 || numberOfDisks < 3) {
+		// Keep looping through the dialogue until a valid number is entered
+		while (numberOfDisks > 25 || numberOfDisks < 3) {
 	    
-	    // Show the dialogue
-	    int userResponse = JOptionPane.showOptionDialog(null, panel, "Towers of Hanoi", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, null);
+	    	// Show the dialogue
+	    	int userResponse = JOptionPane.showOptionDialog(null, panel, "Towers of Hanoi", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, null);
 	    
-	    if (userResponse == 1) {
-		frame.removeAll();
-		frame.validate();
-	     	frame.setVisible(false);
-		GUIMain.startGame();
-		return;	
+	    	if (userResponse == 1) {
+			frame.removeAll();
+			frame.validate();
+	     		frame.setVisible(false);
+			GUIMain.startGame();
+			return;	
 	    }
 	    
 	    // Try to parse the number they entered
-	    try {
-		numberOfDisks = Integer.parseInt(txt.getText());
-		if (numberOfDisks < 3 || numberOfDisks >25) {
-		    JOptionPane.showMessageDialog(frame, "Please input a valid integer between 3 and 25 (inclusive)");
-		    continue;
+	    	try {
+			numberOfDisks = Integer.parseInt(txt.getText());
+			if (numberOfDisks < 3 || numberOfDisks >25) {
+		    		JOptionPane.showMessageDialog(frame, "Please input a valid integer between 3 and 25 (inclusive)");
+		    		continue;
 		}
-	    } catch (NumberFormatException nf) {
-		JOptionPane.showMessageDialog(frame,"Please input a valid integer between 3 and 25 (inclusive)");
+	    } 	catch (NumberFormatException nf) {
+			JOptionPane.showMessageDialog(frame,"Please input a valid integer between 3 and 25 (inclusive)");
 		continue; // NaN -> show dialogue again
 	    }
 	}
-	int winx = numberOfDisks * 50 + 200;
-	int winy = 100 + (numberOfDisks)*20;
-	gui = new GameGUI(winx, winy);
-	gui.setNewState(new TowersOfHanoiState(numberOfDisks));
-	gui.setTimer(new HanoiTimer());
+		int winx = numberOfDisks * 50 + 200;
+		int winy = 100 + (numberOfDisks)*20;
+		gui = new GameGUI(winx, winy);
+		TowersOfHanoiState resetToZero = new TowersOfHanoiState(numberOfDisks);
+		resetToZero.setNewGame(true);
+		gui.setState(resetToZero);
+		gui.setTimer(new HanoiTimer());
 		}		
 	    
 	    });
-
+	
 	continuebutton.addActionListener(new ActionListener(){
 		public void actionPerformed(ActionEvent e)
-		{
-		    frame.setVisible(false);
-		    try{
-	    ObjectInputStream is = new ObjectInputStream(new FileInputStream("SavedGame.ser"));
-	    TowersOfHanoiState gamestate = (TowersOfHanoiState) is.readObject();
-	    HanoiTimer gametimer = (HanoiTimer) is.readObject();
-	    int winx = gamestate.getNumOfDisks()*50 + 200;
-	    int winy = 100 + gamestate.getNumOfDisks()*20;
-	    gui = new GameGUI(winx,winy);
-	    gui.setState(gamestate);
-	    gui.setTimer(gametimer);
-	     }
-	catch (Exception ex){
-	    JOptionPane.showMessageDialog(null, "There is no saved game.", "No Saved Game", JOptionPane.ERROR_MESSAGE);
-	    GUIMain.startGame();}
+		{		        		   		
+			frame.setVisible(false);
+	        	//New way of loading the choosen contunued game
+	    		savedSessionFrame savedFrame = new savedSessionFrame();
+	    		savedFrame.go();
+			 
 		}
 	    });
 		    

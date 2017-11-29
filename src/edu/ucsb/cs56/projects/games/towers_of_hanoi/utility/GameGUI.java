@@ -18,20 +18,20 @@ public class GameGUI {
     private HanoiTimer gameTimer;
     private JPanel timePanel;
     private JLabel timeDisplay;
-    private JFrame frame;
+    public JFrame frame;
     private static JFrame Secondframe;
     private JPanel mainTimePanel;
     public static GamePanel gamePanel;
     public static JPanel pauseDisplay;
     public static JLabel countDisplay;
-    public static JButton pauseTimer;
+    public static JButton continueGame;
     public static JButton resetGame;
-    public static JButton quitGame;
+    public static JButton saveGame;
     public static JButton help;
-    public static String RESET_STR_LIT = "Start over";
-    public static String PAUSE_STR_LIT = "Pause"; 
+    public static String RESET_STR_LIT = "Reset";
+    public static String CONTINUE_STR_LIT = "Continue"; 
     public static String RESUME_STR_LIT = "Resume"; 
-    public static String QUIT_STR_LIT = "Save and Quit";
+    public static String SAVE_STR_LIT = "Save";
     public static TowersOfHanoiState state = new TowersOfHanoiState();
     public GameGUI(int window_x, int window_y) {
 	frame = new JFrame();
@@ -50,9 +50,9 @@ public class GameGUI {
 	countDisplay.setFont(new Font("SansSerif", Font.BOLD, 20));
 	countDisplay.setPreferredSize(new Dimension(170, 50));
         
-       pauseTimer = new JButton(PAUSE_STR_LIT);
+        continueGame = new JButton(CONTINUE_STR_LIT);
 	resetGame = new JButton(RESET_STR_LIT);
-	quitGame = new JButton(QUIT_STR_LIT);
+	saveGame = new JButton(SAVE_STR_LIT);
 	help = new JButton("Help");
         help.addActionListener((e)->{int choice = JOptionPane.showOptionDialog(null,"Tower of Hanoi: \n\nThe goal of this game is to move all the disks from the leftmost tower to either the middle tower or rightmost tower, adhering to the following rules:\n   1) Move only one disk at a time.\n   2) A larger disk may not be placed ontop of a smaller disk.\n   3) All disks, except the one being moved, must be on a tower. \n\n Please press the OK button to continue","CHOOSE AN OPTION?", JOptionPane.YES_NO_OPTION,JOptionPane.INFORMATION_MESSAGE, null, new Object[]{"Ok"}, null);});
 
@@ -61,38 +61,38 @@ public class GameGUI {
 	gameOption.addActionListener(new ActionListener(){
 		public void actionPerformed(ActionEvent e)
 		{
-
+		    //pause timer
+		    gameTimer.pause();
+		    //set up option frame
 		    Secondframe = new JFrame("Game Option");
 		    Secondframe.setLayout(new GridLayout(1,4,20,10));
-		    Secondframe.add(pauseTimer);
+		    Secondframe.add(continueGame);
 		    Secondframe.add(resetGame);
                     Secondframe.add(help);		
-		    Secondframe.add(quitGame); 
+		    Secondframe.add(saveGame); 
 		    Secondframe.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		    Secondframe.setSize(600,100);
+		    Secondframe.setSize(900,100);
 		    Secondframe.setLocationRelativeTo(null);
 		    Secondframe.setVisible(true);
- 		    
-	
-		    
-		    }});
-		
+ 		    frame.setVisible(false);
+	            //open frame when continue is hit
+		    continueGame.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e)
+			{
+				frame.setVisible(true);
+				
+			}});
+
+		}});		
 	mainTimePanel = new JPanel(new BorderLayout());
 	timePanel = new JPanel(new BorderLayout());
 	timePanel.add(countDisplay, BorderLayout.NORTH);
 	timePanel.add(timeDisplay, BorderLayout.CENTER);
-	//timePanel.add(pauseTimer, BorderLayout.WEST);
-	//timePanel.add(resetGame, BorderLayout.EAST);
 	timePanel.add(gameOption, BorderLayout.WEST);
-	
-	//gameTimer = new HanoiTimer(timeDisplay);
-	//gameTimer.setLabel(timeDisplay);
-	//gameTimer.SetTimeElapsedText();
 	mainTimePanel.add(timePanel, BorderLayout.NORTH);
 	
 	gamePanel = new GamePanel();
 	gamePanel.setPreferredSize(new Dimension(window_x,window_y));
-	//gamePanel.setTimer(gameTimer);
 
 
 	JLabel instructions = new JLabel("To pick up a disk, click on a tower, then click on another tower to deposit it.");
@@ -113,19 +113,14 @@ public class GameGUI {
 	
 		    
 	frame.setVisible(true);
-	//gameTimer.start();
+	//game.start();
+
     }
     
     
-    public void setNewState(TowersOfHanoiState s){
-	state = s;	
-		
-	gamePanel.setState(s);
-	s.setNumOfMoves(0);		
-    }
     public void setState(TowersOfHanoiState s){
 	state = s;		
-	gamePanel.setState(s);		
+	gamePanel.setState(state);		
     }
     public void setTimer(HanoiTimer t){
 	if (t.getTotalTime() > 0){
@@ -135,14 +130,13 @@ public class GameGUI {
 	    gameTimer = t;}
 	gameTimer.setstartTime();
 	gameTimer.setLabel(timeDisplay);
-	if (gameTimer.getPaused())
-	    {pauseTimer.setText(RESUME_STR_LIT);}
 	gamePanel.setTimer(gameTimer);
 	gameTimer.start();
 	
     }
+  
     
-    public void close() {
+    public  void close() {
 	frame.dispose();
     }
     public static void closeOption(){

@@ -26,10 +26,24 @@ public class GameSetting implements Serializable{
     public String getDiskType(){
 	return DiskType;}
     public void setDiskType(){
-	if (DiskType == "Block")
+	String c = DiskType;
+	switch (c){
+	case "Block":
 	    DiskType = "Round";
-	else
-	    DiskType = "Block";}
+	    break;
+	case "Round":
+	    DiskType = "Wood";
+	    break;
+	case "Wood":
+	    DiskType = "Brick";
+	    break;
+	case "Brick":
+	    DiskType = "Stone";
+	    break;
+	case "Stone":
+	    DiskType = "Block";
+	    break;
+	}}
     public String getColorS(){
 	return ColorS;}
     public Color getColor(){
