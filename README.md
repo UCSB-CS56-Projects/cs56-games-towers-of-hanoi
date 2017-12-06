@@ -95,7 +95,7 @@ Moreover, there are two features can be improved, save and load, and the graphic
 ### F17 Final Remarks
 F17 removed the bugs of when the player pauses the game, just the timer pauses, which means that the player can still play with the blocks. We also added the option to continue from three past saves and choose from three different textures. 
 
-An additional GUI could be added to let the user write its own file and choose the file Name. There could also be additonal textures addded as there was only three added. 
+An additional GUI could be added to let the user write its own file and choose the file Name. There could also be additonal textures added as there was only three added. 
 
 Current bugs that still exist are the move count setting to 0 from a continued game. The bug can be reprouduced by playing a new game, moving at least one disk and saving the game. Then from the main menu, continue the saved game. The move count will show '0' then updates to the correct move count once a disk is moved. 
 
