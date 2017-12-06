@@ -12,33 +12,32 @@ import javax.sound.sampled.UnsupportedAudioFileException;
 public class Sound {
     public Clip clip;
     public Sound(String soundFile) {
-        //soundFile is a .wav audio file from music file
-    	try {
-    		File file = new File(soundFile);
-    		if (file.exists()) {
-    			AudioInputStream sound = AudioSystem.getAudioInputStream(file);
-    			clip = AudioSystem.getClip();
-    			clip.open(sound);
-    		}
-    		else {
-    			throw new RuntimeException("Sound: RuntimeException Error: " + soundFile);
-    		}
-		}
-		catch (MalformedURLException ex) {
-			ex.printStackTrace();
-			throw new RuntimeException("Sound: Malformed URL Exception Error: " + ex);
-		}
+    //soundFile is a .wav audio file from music file
+	try {
+	File file = new File(soundFile);
+	if (file.exists()) {
+	AudioInputStream sound = AudioSystem.getAudioInputStream(file);
+	clip = AudioSystem.getClip();
+	clip.open(sound);
+	}
+	else {
+	  throw new RuntimeException("Sound: RuntimeException Error: " + soundFile);
+	}}
+	catch (MalformedURLException ex) {
+	  ex.printStackTrace();
+	  throw new RuntimeException("Sound: Malformed URL Exception Error: " + ex);
+	}
     	catch (UnsupportedAudioFileException ex) {
-    		ex.printStackTrace();
-    		throw new RuntimeException("Sound: Unsupported Audio File Exception Error: " + ex);
+    	  ex.printStackTrace();  
+    	  throw new RuntimeException("Sound: Unsupported Audio File Exception Error: " + ex);
     	}
     	catch (IOException ex) {
-    		ex.printStackTrace();
-    		throw new RuntimeException("Sound: IOException Error: " + ex);
+    	  ex.printStackTrace();
+    	  throw new RuntimeException("Sound: IOException Error: " + ex);
     	}
     	catch (LineUnavailableException ex) {
-    		ex.printStackTrace();
-    		throw new RuntimeException("Sound: Line Unavailable Exception Error: " + ex);
+    	  ex.printStackTrace();
+    	  throw new RuntimeException("Sound: Line Unavailable Exception Error: " + ex);
     	}
     }
 

@@ -13,8 +13,10 @@ public class TowersOfHanoiState implements Serializable{
     
     
     private boolean isGameSolved = false;
-    private int numOfMoves = 0;
-    public int numOfDisks;
+    private int numOfMoves =0;
+    public int numOfDisks = 0;
+    public boolean newGame = true;  
+    public boolean continuedGame = false;
     private ArrayList<ArrayList<Integer>> towers 
 	= new ArrayList<ArrayList<Integer>>(3); //the 3 towers and their disks will be stored here
     
@@ -51,6 +53,8 @@ public class TowersOfHanoiState implements Serializable{
         towers.add(1, new ArrayList<Integer>(3));
         towers.add(2, new ArrayList<Integer>(3));
 	this.numOfDisks = 3;
+	this.numOfMoves = 0;
+	this.newGame = true;
     }
 
     /**
@@ -68,6 +72,8 @@ public class TowersOfHanoiState implements Serializable{
 	    towers.add(1, new ArrayList<Integer>(3));
 	    towers.add(2, new ArrayList<Integer>(3));
 	    this.numOfDisks = 3;
+	    this.numOfMoves = 0;
+	    this.newGame = false;
 	}
 	
 	else { // else user input is number of disks
@@ -80,6 +86,8 @@ public class TowersOfHanoiState implements Serializable{
 		towers.get(0).add(x);
 	    }
 	    this.numOfDisks = numOfDisks;
+	    this.numOfMoves = 0;
+	    this.newGame = false;
 	}
 	
     }
@@ -91,23 +99,40 @@ public class TowersOfHanoiState implements Serializable{
     
     public boolean getIsGameSolved(){
 
-
-	return isGameSolved; 
+	
+	return isGameSolved;
     }
 
     /**
      Getter method which returns the integer value numOfMoves.
+     @param num is an integer representing number of moves made in a game session.
      @return integer value numOfMoves in TowersOfHanoiState
      */
-
+    public int setNumOfMoves(int num){
+    	numOfMoves = num;
+	return numOfMoves;
+	}
     public int getNumOfMoves(){
 
 	return numOfMoves;
     }
     public int getNumOfDisks(){
 	return numOfDisks;}
+    public boolean setNewGame(boolean t){
+    	newGame = t;
+	return newGame;
+	}
+    public boolean getNewGame(){
 
-
+	return newGame;
+    }
+    public boolean setContinuedGame(boolean n){
+	continuedGame = n;
+	return continuedGame;
+    }
+    public boolean getContinuedGame(){
+	return continuedGame;
+    }
     /**
      Getter method which returns the ArrayList reference towers.
      @return ArrayList value towers in TowersOfHanoiState
@@ -270,6 +295,8 @@ public class TowersOfHanoiState implements Serializable{
     	int optimalSolution = (int) Math.pow(2,numOfDisks) - 1; // 2^n - 1 is the optimal solution for the game
     	System.out.println("Congratulations! You solved the game in " + this.getNumOfMoves()
                                + " steps. Optimal solution would have been " + optimalSolution
-			   + " steps." ); 
+			   + " steps." );
+        	
     }   
 }
+	

@@ -11,7 +11,7 @@ import javax.swing.JLabel;
  * This is a timer class that will begin running as soon as it is created. A JLabel is required for it to display in format mm:ss
  * @author Aaron Wexler / amwexler
  */
-public class HanoiTimer implements Serializable {
+    public class HanoiTimer implements Serializable {
     private GregorianCalendar gc = new GregorianCalendar();
     private transient long startTime = 0;
     private long pauseTime = 0;
@@ -23,19 +23,15 @@ public class HanoiTimer implements Serializable {
     private boolean started = false;
     /**
      * Consructs a new HanoiTimer and starts the timer running.
-     * @param label The label that will receive the formatted elapsed time.
      */
     public HanoiTimer() {
-	//timeLabel = label;
-     Timer timer = new Timer();
-     timer.schedule(new TimerTask() {
-
-      @Override
-      public void run() {
-          updateTimer();
-      }
-    }, 0, 1000);
-     start();
+	Timer timer = new Timer();
+	timer.schedule(new TimerTask() {
+    @Override
+    public void run() {
+        updateTimer();
+    }}, 0, 1000);
+     	start();
     }
     public HanoiTimer(HanoiTimer t){
 	pauseTime = t.getPauseTime();
@@ -46,15 +42,12 @@ public class HanoiTimer implements Serializable {
 	started = t.getStarted();
 	Timer timer = new Timer();
 	timer.schedule(new TimerTask() {
-
-      @Override
-      public void run() {
-          updateTimer();
-      }
-    }, 0, 1000);
-     start();
+    @Override
+    public void run() {
+        updateTimer();
+    }}, 0, 1000);
+	start();
     }
-
     public void updateTimer() {
        if(timeLabel != null) {
            this.SetTimeElapsedText();
@@ -67,50 +60,57 @@ public class HanoiTimer implements Serializable {
     public void restart() { 
        this.stop();
        this.start();
-   }
+    }
     public void setstartTime(){
-	startTime = System.currentTimeMillis() - totalTime;}
+	startTime = System.currentTimeMillis() - totalTime;
+    }
     public void setLabel(JLabel label){
-	timeLabel = label;}
+	timeLabel = label;
+    }
     public long getTotalTime(){
 	return totalTime;
     }
     public long getStartTime(){
-	return startTime;}
+	return startTime;
+    }
     public JLabel getLabel(){
-	return timeLabel;}
+	return timeLabel;
+    }
     public long getPauseTime(){
-	return pauseTime;}
+	return pauseTime;
+    }
     public long geteTime(){
-	return eTime;}
+	return eTime;
+    }
     public boolean getStopped(){
-	return stopped;}
+	return stopped;
+    }
     public boolean getPaused(){
-	return paused;}
+	return paused;
+    }
     public boolean getStarted(){
-	return started;}
+	return started;
+    }
     /**
      * If stopped, the timer will restart. Otherwise, do nothing
      */
     public void start() {
-	if(!stopped)return;
-       startTime = System.currentTimeMillis() - totalTime;
-       stopped = false;
-       paused = false;
-       started = true;
-   }
-
+	if(!stopped)
+	return;
+        startTime = System.currentTimeMillis() - totalTime;
+        stopped = false;
+        paused = false;
+        started = true;
+    }
     /**
      * Stops processing of timer events
      */
     public void stop() {
-       stopped = true;	
+        stopped = true;	
     }
-
     public void pause() {
         started = false;
-
-        if(paused == false) {
+        if(paused == false){
             //pauseTime is the time at which you press the Pause button
             //Takes into account for the startTime and the previous pause button eTime difference
             pauseTime = System.currentTimeMillis() - startTime - (eTime - pauseTime);
@@ -131,7 +131,6 @@ public class HanoiTimer implements Serializable {
      * Sets the label text of the JLabel to the elapsed time in proper format
      */
     public void SetTimeElapsedText() {
-
         if(stopped == true || timeLabel == null){
             //before the game starts
             return;

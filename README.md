@@ -57,7 +57,7 @@ After you have clicked yes. A new window will pop up asking you to enter how man
 
 Once you click play the game window pops up. You are given a timer on top that continues to run until you are finished or pause the game.You are also given some instructions on the bottom part of the window. Everytime you click a tower the topmost block is highlighted with a particular color. Color of blocks can be changed in the settings button which is located in the main menu. 
 
-There is also an options button that allows you to pause the game, reset the game by taking you to the main menu, a help button that gives you instructions of the game and save button that allows you to save the game data. 
+There is also an options button that will pause the game, and allow you to reset the game and take you to the main menu, a help button that gives you instructions of the game and save button that allows you to save the game data and a continue button to start the timer again and continue playing. 
 
 ![](http://i.imgur.com/1uKPXgZ.png)
 
@@ -71,11 +71,11 @@ Upon completion, the game provides feedback.
 
 ### Continue Button
 
-When clicking the Continue button you are able to continue the last game state that you have saved after saving the game on the game frame using the options button. 
+When clicking the Continue button you are able to continue the last game state that you have saved after saving the game on the game frame using the options button. Then pick the load state you want to continue from.
 
 ### Setting Button
 
-When clicking the settings button you can change many features such as the shape of the block, the color of the block, turn music on or off, and turn the instructions on or off. After changing each feature on the settings frame you must make sure to click the save button before exiting out of the frame. 
+When clicking the settings button you can change many features such as the shape of the block, the color or texture of the block, turn music on or off, and turn the instructions on or off. After changing each feature on the settings frame you must make sure to click the save button before exiting out of the frame. 
 
 ![](http://i.imgur.com/cFVj15G.png)
 
@@ -91,4 +91,11 @@ Because we included audio into the GUI version of this game, this game will not 
 This version of Tower of Hanoi game fulfils the basic requirement for a game, which has features like save and load, change of color of the blocks, pause and resume, restart, and instructions. However, there are some bugs exist in the current system. When the player pauses the game, just the timer pauses, which means that the player can still play with the blocks. This should not happen for a real pause, and should be fixed in later version.
 
 Moreover, there are two features can be improved, save and load, and the graphics of the tower. In current version, only one game can be saved and it can be improved to have multiple game saved in same time and load by the choice of players.For the graphics, different skins of disks and the background of the tower  are prefered.
+
+### F17 Final Remarks
+F17 removed the bugs of when the player pauses the game, just the timer pauses, which means that the player can still play with the blocks. We also added the option to continue from three past saves and choose from three different textures. 
+
+An additional GUI could be added to let the user write its own file and choose the file Name. There could also be additonal textures added as there was only three added. 
+
+Current bugs that still exist are the move count setting to 0 from a continued game. The bug can be reprouduced by playing a new game, moving at least one disk and saving the game. Then from the main menu, continue the saved game. The move count will show '0' then updates to the correct move count once a disk is moved. 
 

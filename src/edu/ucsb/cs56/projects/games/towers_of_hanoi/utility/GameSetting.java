@@ -1,18 +1,20 @@
 package edu.ucsb.cs56.projects.games.towers_of_hanoi.utility;
 import java.io.*;
 import java.awt.*;
+
 public class GameSetting implements Serializable{
-    boolean instruction;
-    boolean music;
-    String DiskType;
-    Color Diskcolor;
-    String ColorS;
+	boolean instruction;
+	boolean music;
+	String diskType;
+	Color diskColor;
+	String colorS;
     public GameSetting(){
 	instruction = true;
         music=true;
-	DiskType = "Block";
-	Diskcolor = Color.BLACK;
-	ColorS = "Black";}
+	diskType = "Block";
+	diskColor = Color.BLACK;
+	colorS = "Black";
+    }
     public boolean getInstruction(){
 	return instruction;}
     public void setInstruction(boolean t){
@@ -23,36 +25,52 @@ public class GameSetting implements Serializable{
     public void setMusic(boolean t){
 	music=t;
     }
-    public String getDiskType(){
-	return DiskType;}
-    public void setDiskType(){
-	if (DiskType == "Block")
-	    DiskType = "Round";
-	else
-	    DiskType = "Block";}
-    public String getColorS(){
-	return ColorS;}
+    public String getdiskType(){
+	return diskType;}
+    public void setdiskType(){
+	String c = diskType;
+	switch (c){
+	case "Block":
+	    diskType = "Round";
+	    break;
+	case "Round":
+	    diskType = "Wood";
+	    break;
+	case "Wood":
+	    diskType = "Brick";
+	    break;
+	case "Brick":
+	    diskType = "Stone";
+	    break;
+	case "Stone":
+	    diskType = "Block";
+	    break;
+	}
+    }
+    public String getcolorS(){
+	return colorS;}
     public Color getColor(){
-	return Diskcolor;}
+	return diskColor;}
     public void setColor(){
-	String c = ColorS;
+	String c = colorS;
 	switch (c){
 	case "Black":
-	    Diskcolor = Color.BLUE;
-	    ColorS = "Blue";
+	    diskColor = Color.BLUE;
+	    colorS = "Blue";
 	    break;
 	case "Blue":
-	    Diskcolor = Color.RED;
-	    ColorS = "Red";
+	    diskColor = Color.RED;
+	    colorS = "Red";
 	    break;
 	case "Red":
-	    Diskcolor = new Color(0x4C0099);
-	    ColorS = "Purple";
+	    diskColor = new Color(0x4C0099);
+	    colorS = "Purple";
 	    break;
 	case "Purple":
-	    Diskcolor = Color.BLACK;
-	    ColorS = "Black";
-	    break;}}
-	
+	    diskColor = Color.BLACK;
+	    colorS = "Black";
+	    break;
+	}
+    }
 }
     
