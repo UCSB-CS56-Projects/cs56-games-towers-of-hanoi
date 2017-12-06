@@ -87,6 +87,10 @@ GUI Audio
 
 Because we included audio into the GUI version of this game, this game will not run through ssh but works perfectly fine on local computer or on CSIL computers (without ssh).
 
+### Javadoc
+
+Javadoc is available at [here](http://ucsb-cs56-projects.github.io/cs56-games-towers-of-hanoi/javadoc/index.html)
+
 ### F16 Final Remarks
 This version of Tower of Hanoi game fulfils the basic requirement for a game, which has features like save and load, change of color of the blocks, pause and resume, restart, and instructions. However, there are some bugs exist in the current system. When the player pauses the game, just the timer pauses, which means that the player can still play with the blocks. This should not happen for a real pause, and should be fixed in later version.
 
