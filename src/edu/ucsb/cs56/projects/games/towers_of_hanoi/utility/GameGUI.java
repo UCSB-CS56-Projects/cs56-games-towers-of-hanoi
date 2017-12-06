@@ -14,12 +14,12 @@ import java.awt.Color;
  * JLabel.  ActionListeners call the HanoiTimer's start/restart/stop methods.
 */
 public class GameGUI {
-	public static Sound song = new Sound("music/backgroundSong.wav");
+    public static Sound song = new Sound("music/backgroundSong.wav");
     private HanoiTimer gameTimer;
     private JPanel timePanel;
     private JLabel timeDisplay;
     public JFrame frame;
-    private static JFrame Secondframe;
+    public static JFrame secondFrame;
     private JPanel mainTimePanel;
     public static GamePanel gamePanel;
     public static JPanel pauseDisplay;
@@ -59,31 +59,29 @@ public class GameGUI {
         JButton gameOption = new JButton("Option");
 	resetGame.setActionCommand("Action");
 	gameOption.addActionListener(new ActionListener(){
-		public void actionPerformed(ActionEvent e)
-		{
-		    //pause timer
-		    gameTimer.pause();
-		    //set up option frame
-		    Secondframe = new JFrame("Game Option");
-		    Secondframe.setLayout(new GridLayout(1,4,20,10));
-		    Secondframe.add(continueGame);
-		    Secondframe.add(resetGame);
-                    Secondframe.add(help);		
-		    Secondframe.add(saveGame); 
-		    Secondframe.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		    Secondframe.setSize(900,100);
-		    Secondframe.setLocationRelativeTo(null);
-		    Secondframe.setVisible(true);
- 		    frame.setVisible(false);
-	            //open frame when continue is hit
-		    continueGame.addActionListener(new ActionListener(){
-			public void actionPerformed(ActionEvent e)
-			{
-				frame.setVisible(true);
-				
-			}});
+	
+    public void actionPerformed(ActionEvent e){
+	//pause timer
+	gameTimer.pause();
+	//set up option frame
+	secondFrame = new JFrame("Game Option");
+	secondFrame.setLayout(new GridLayout(1,4,20,10));
+	secondFrame.add(continueGame);
+	secondFrame.add(resetGame);
+	secondFrame.add(help);		
+	secondFrame.add(saveGame); 
+	secondFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+	secondFrame.setSize(900,100);
+	secondFrame.setLocationRelativeTo(null);
+	secondFrame.setVisible(true);
+	frame.setVisible(false);
+	//open frame when continue is hit
 
-		}});		
+    continueGame.addActionListener(new ActionListener(){
+    public void actionPerformed(ActionEvent e){				
+	frame.setVisible(true);		
+    }});
+    }});		
 	mainTimePanel = new JPanel(new BorderLayout());
 	timePanel = new JPanel(new BorderLayout());
 	timePanel.add(countDisplay, BorderLayout.NORTH);
@@ -94,29 +92,21 @@ public class GameGUI {
 	gamePanel = new GamePanel();
 	gamePanel.setPreferredSize(new Dimension(window_x,window_y));
 
-
 	JLabel instructions = new JLabel("To pick up a disk, click on a tower, then click on another tower to deposit it.");
 	instructions.setFont(new Font("Verdana",1,14));
 	frame.add(gamePanel,BorderLayout.CENTER);
 	frame.add(mainTimePanel,BorderLayout.NORTH);
 	if (GUIMain.gamesetting.getInstruction()){
 	    frame.add(instructions,BorderLayout.SOUTH);}
-	
 	frame.add(gamePanel,BorderLayout.CENTER);
 	frame.pack();
-
-	
-	System.out.flush();
-	
+	System.out.flush();	
 	// centers the window
-	frame.setLocationRelativeTo(null);
-	
-		    
+	frame.setLocationRelativeTo(null);	    
 	frame.setVisible(true);
 	//game.start();
 
     }
-    
     
     public void setState(TowersOfHanoiState s){
 	state = s;		
@@ -125,22 +115,22 @@ public class GameGUI {
     public void setTimer(HanoiTimer t){
 	if (t.getTotalTime() > 0){
 	    gameTimer = new HanoiTimer(t);
-	    }
+	}
 	else {
-	    gameTimer = t;}
+	gameTimer = t;}
 	gameTimer.setstartTime();
 	gameTimer.setLabel(timeDisplay);
 	gamePanel.setTimer(gameTimer);
 	gameTimer.start();
-	
-    }
-  
-    
+	gameTimer.restart();
+        }
+
     public  void close() {
 	frame.dispose();
     }
     public static void closeOption(){
-	Secondframe.dispose();}
+	secondFrame.dispose();
+    }
 	
 }
      
